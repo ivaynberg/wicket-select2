@@ -1,11 +1,11 @@
 /*
  * Copyright 2012 Igor Vaynberg
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this work except in compliance with
  * the License. You may obtain a copy of the License in the LICENSE file, or at:
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
@@ -22,7 +22,7 @@ public enum Country {
 	    "Burkina Faso"), BI("Burundi"), KH("Cambodia"), CM("Cameroon"), CA("Canada"), CV("Cape Verde"), KY(
 	    "Cayman Islands"), CF("Central African Republic"), TD("Chad"), CL("Chile"), CN("China"), CX(
 	    "Christmas Island"), CC("Cocos Islands"), CO("Colombia"), KM("Comoros"), CG("Congo"), CK("Cook Islands"), CR(
-	    "Costa Rica"), HR("Croatia"), CU("Cuba"), CY("Cyprus"), CZ("Czech Republic"), CI("Côte d'Ivoire"), DK(
+	    "Costa Rica"), HR("Croatia"), CU("Cuba"), CY("Cyprus"), CZ("Czech Republic"), CI("CÃ´te d'Ivoire"), DK(
 	    "Denmark"), DJ("Djibouti"), DM("Dominica"), DO("Dominican Republic"), EC("Ecuador"), EG("Egypt"), SV(
 	    "El Salvador"), GQ("Equatorial Guinea"), ER("Eritrea"), EE("Estonia"), ET("Ethiopia"), FK(
 	    "Falkland Islands"), FO("Faroe Islands"), FJ("Fiji"), FI("Finland"), FR("France"), GF("French Guiana"), PF(
@@ -42,7 +42,7 @@ public enum Country {
 	    "Niue"), NF("Norfolk Island"), KP("North Korea"), MP("Northern Mariana Islands"), NO("Norway"), OM("Oman"), PK(
 	    "Pakistan"), PW("Palau"), PS("Palestine"), PA("Panama"), PG("Papua New Guinea"), PY("Paraguay"), PE("Peru"), PH(
 	    "Philippines"), PN("Pitcairn"), PL("Poland"), PT("Portugal"), PR("Puerto Rico"), QA("Qatar"), RE("Reunion"), RO(
-	    "Romania"), RU("Russia"), RW("Rwanda"), BL("Saint Barthélemy"), SH("Saint Helena"), KN(
+	    "Romania"), RU("Russia"), RW("Rwanda"), BL("Saint BarthÃ©lemy"), SH("Saint Helena"), KN(
 	    "Saint Kitts And Nevis"), LC("Saint Lucia"), MF("Saint Martin"), PM("Saint Pierre And Miquelon"), VC(
 	    "Saint Vincent And The Grenadines"), WS("Samoa"), SM("San Marino"), ST("Sao Tome And Principe"), SA(
 	    "Saudi Arabia"), SN("Senegal"), RS("Serbia"), CS("Serbia and Montenegro"), SC("Seychelles"), SL(
@@ -55,7 +55,7 @@ public enum Country {
 	    "Tuvalu"), VI("U.S. Virgin Islands"), UG("Uganda"), UA("Ukraine"), AE("United Arab Emirates"), GB(
 	    "United Kingdom"), US("United States"), UM("United States Minor Outlying Islands"), UY("Uruguay"), UZ(
 	    "Uzbekistan"), VU("Vanuatu"), VA("Vatican"), VE("Venezuela"), VN("Vietnam"), WF("Wallis And Futuna"), EH(
-	    "Western Sahara"), YE("Yemen"), ZM("Zambia"), ZW("Zimbabwe"), AX("Åland Islands");
+	    "Western Sahara"), YE("Yemen"), ZM("Zambia"), ZW("Zimbabwe"), AX("Ã…land Islands");
 
     private final String displayName;
 
