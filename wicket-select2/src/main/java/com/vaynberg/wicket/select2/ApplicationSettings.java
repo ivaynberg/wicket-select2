@@ -129,16 +129,18 @@ public class ApplicationSettings {
 	return javaScriptMinifiedReference;
     }
 
-    public void setJavaScriptMinifiedReference(ResourceReference javaScriptMinifiedReference) {
+    public ApplicationSettings setJavaScriptMinifiedReference(ResourceReference javaScriptMinifiedReference) {
 	this.javaScriptMinifiedReference = javaScriptMinifiedReference;
+	return this;
     }
 
     public ResourceReference getJqueryMinifiedReference() {
 	return jqueryMinifiedReference;
     }
 
-    public void setJqueryMinifiedReference(ResourceReference jqueryMinifiedReference) {
+    public ApplicationSettings setJqueryMinifiedReference(ResourceReference jqueryMinifiedReference) {
 	this.jqueryMinifiedReference = jqueryMinifiedReference;
+	return this;
     }
 
     /**

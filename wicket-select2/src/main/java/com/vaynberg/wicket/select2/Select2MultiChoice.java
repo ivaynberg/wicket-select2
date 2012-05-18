@@ -37,6 +37,14 @@ public class Select2MultiChoice<T> extends AbstractSelect2Choice<T, Collection<T
 	super(id, model, provider);
     }
 
+    public Select2MultiChoice(String id, IModel<Collection<T>> model) {
+	super(id, model);
+    }
+
+    public Select2MultiChoice(String id) {
+	super(id);
+    }
+
     @Override
     protected void convertInput() {
 

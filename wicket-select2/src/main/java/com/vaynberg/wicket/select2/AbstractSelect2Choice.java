@@ -16,6 +16,8 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 
 import org.apache.wicket.IResourceListener;
+import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.event.IEvent;
 import org.apache.wicket.markup.html.IHeaderResponse;
 import org.apache.wicket.markup.html.form.HiddenField;
 import org.apache.wicket.model.IModel;
@@ -41,7 +43,33 @@ abstract class AbstractSelect2Choice<T, M> extends HiddenField<M> implements IRe
 
     private final Settings settings = new Settings();
 
-    private final ChoiceProvider<T> provider;
+    private ChoiceProvider<T> provider;
+
+    /**
+     * Constructor
+     * 
+     * @param id
+     *            component id
+     * @param model
+     *            component model
+     * @param provider
+     *            choice provider
+     */
+    public AbstractSelect2Choice(String id) {
+	this(id, null, null);
+    }
+
+    /**
+     * Constructor
+     * 
+     * @param id
+     *            component id
+     * @param model
+     *            component model
+     */
+    public AbstractSelect2Choice(String id, IModel<M> model) {
+	this(id, model, null);
+    }
 
     /**
      * Constructor
@@ -70,9 +98,22 @@ abstract class AbstractSelect2Choice<T, M> extends HiddenField<M> implements IRe
     }
 
     /**
+     * Sets the choice provider
+     * 
+     * @param provider
+     */
+    public final void setProvider(ChoiceProvider<T> provider) {
+	this.provider = provider;
+    }
+
+    /**
      * @return choice provider
      */
-    public ChoiceProvider<T> getProvider() {
+    public final ChoiceProvider<T> getProvider() {
+	if (provider == null) {
+	    throw new IllegalStateException("Select2 choice component: " + getId()
+		    + " does not have a ChoiceProvider set");
+	}
 	return provider;
     }
 
@@ -106,13 +147,36 @@ abstract class AbstractSelect2Choice<T, M> extends HiddenField<M> implements IRe
 
 	AjaxSettings ajax = settings.getAjax(true);
 
-	ajax.setUrl(urlFor(IResourceListener.INTERFACE, null));
-
 	ajax.setData(String
 		.format("function(term, page) { return { term: term, page:page, '%s':true, '%s':[window.location.protocol, '//', window.location.host, window.location.pathname].join('')}; }",
 			WebRequest.PARAM_AJAX, WebRequest.PARAM_AJAX_BASE_URL));
 
 	ajax.setResults("function(data, page) { return data; }");
+    }
+
+    @Override
+    protected void onConfigure() {
+	super.onConfigure();
+
+	getSettings().getAjax().setUrl(urlFor(IResourceListener.INTERFACE, null));
+    }
+
+    @Override
+    public void onEvent(IEvent<?> event) {
+	super.onEvent(event);
+
+	if (event.getPayload() instanceof AjaxRequestTarget) {
+
+	    AjaxRequestTarget target = (AjaxRequestTarget) event.getPayload();
+
+	    if (target.getComponents().contains(this)) {
+
+		// if this component is being repainted by ajax, directly, we must destroy Select2 so it removes
+		//its elements from DOM
+
+		target.prependJavaScript(String.format("$('#%s').select2('destroy');", getMarkupId()));
+	    }
+	}
     }
 
     @Override
