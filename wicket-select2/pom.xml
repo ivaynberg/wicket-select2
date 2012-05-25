@@ -4,11 +4,11 @@
 	<parent>
 		<artifactId>wicket-select2-parent</artifactId>
 		<groupId>com.vaynberg.wicket.select2</groupId>
-		<version>0.5</version>
+		<version>0.6-SNAPSHOT</version>
 	</parent>
 	<groupId>com.vaynberg.wicket.select2</groupId>
 	<artifactId>wicket-select2</artifactId>
-	<version>0.5</version>
+	<version>0.6-SNAPSHOT</version>
 	<name>Wicket-Select2 Components</name>
 	<description>Bridges Apache Wicket with Select2 components</description>
 	<url>https://github.com/ivaynberg/wicket-select2</url>
