@@ -123,7 +123,7 @@ abstract class AbstractSelect2Choice<T, M> extends HiddenField<M> implements IRe
 
 	// initialize select2
 
-	response.renderOnDomReadyJavaScript(String.format("$('#%s').select2(%s);", getMarkupId(), settings.toJson()));
+	response.renderOnDomReadyJavaScript(JQuery.execute("$('#%s').select2(%s);", getMarkupId(), settings.toJson()));
 
 	// select current value
 
@@ -174,7 +174,7 @@ abstract class AbstractSelect2Choice<T, M> extends HiddenField<M> implements IRe
 		// if this component is being repainted by ajax, directly, we must destroy Select2 so it removes
 		//its elements from DOM
 
-		target.prependJavaScript(String.format("$('#%s').select2('destroy');", getMarkupId()));
+		target.prependJavaScript(JQuery.execute("$('#%s').select2('destroy');", getMarkupId()));
 	    }
 	}
     }
