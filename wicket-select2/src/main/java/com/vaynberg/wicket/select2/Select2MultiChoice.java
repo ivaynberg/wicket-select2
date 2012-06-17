@@ -100,6 +100,10 @@ public class Select2MultiChoice<T> extends AbstractSelect2Choice<T, Collection<T
 
 	    response.renderOnDomReadyJavaScript(JQuery.execute("$('#%s').select2('val', %s);", getMarkupId(),
 		    selection.toJson()));
+	} else
+	{
+		response.renderOnDomReadyJavaScript(JQuery.execute("$('#%s').select2('val', %s);", getMarkupId(),
+			    null));
 	}
     }
 
