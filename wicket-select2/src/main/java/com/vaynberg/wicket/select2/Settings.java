@@ -26,24 +26,27 @@ import com.vaynberg.wicket.select2.json.Json;
  */
 public final class Settings implements Serializable {
 
-    private Integer minimumInputLength;
-    private Integer minimumResultsForSearch;
+    private Integer minimumInputLength, minimumResultsForSearch;
+    private Integer maximumSelectionSize;
     private Object placeholder;
     private Boolean allowClear;
     private Boolean multiple;
     private Boolean closeOnSelect;
-    private String id;
-    private String formatSelection;
-    private String formatResult;
-    private String formatNoMatches;
-    private String formatInputTooShort;
+    private String id, matcher, tokenizer;
+    private String formatSelection, formatSelectionTooBig, formatResult, formatNoMatches, formatInputTooShort,
+	    formatResultCssClass, formatLoadMore, formatSearching;
     private String createSearchChoice;
     private String initSelection;
     private String query;
+    private String width;
+    private Boolean openOnEnter;
+    private String containerCss, dropdownCss, containerCssClass, dropdownCssClass;
 
     private AjaxSettings ajax;
     private String data;
     private String tags;
+    private String separator;
+    private String[] tokenSeparators;
 
     public CharSequence toJson() {
 	try {
@@ -51,19 +54,33 @@ public final class Settings implements Serializable {
 	    writer.object();
 	    Json.writeObject(writer, "minimumInputLength", minimumInputLength);
 	    Json.writeObject(writer, "minimumResultsForSearch", minimumResultsForSearch);
+	    Json.writeObject(writer, "maximumSelectionSize", maximumSelectionSize);
 	    Json.writeObject(writer, "placeholder", placeholder);
 	    Json.writeObject(writer, "allowClear", allowClear);
 	    Json.writeObject(writer, "multiple", multiple);
 	    Json.writeObject(writer, "closeOnSelect", closeOnSelect);
 	    Json.writeFunction(writer, "id", id);
+	    Json.writeFunction(writer, "matcher", matcher);
+	    Json.writeFunction(writer, "tokenizer", tokenizer);
 	    Json.writeFunction(writer, "formatSelection", formatSelection);
 	    Json.writeFunction(writer, "formatResult", formatResult);
 	    Json.writeFunction(writer, "formatNoMatches", formatNoMatches);
 	    Json.writeFunction(writer, "formatInputTooShort", formatInputTooShort);
+	    Json.writeFunction(writer, "formatResultCssClass", formatResultCssClass);
+	    Json.writeFunction(writer, "formatSelectionTooBig", formatSelectionTooBig);
+	    Json.writeFunction(writer, "formatLoadMore", formatLoadMore);
+	    Json.writeFunction(writer, "formatSearching", formatSearching);
 	    Json.writeFunction(writer, "createSearchChoice", createSearchChoice);
 	    Json.writeFunction(writer, "initSelection", initSelection);
 	    Json.writeFunction(writer, "query", query);
-
+	    Json.writeObject(writer, "width", width);
+	    Json.writeObject(writer, "openOnEnter", openOnEnter);
+	    Json.writeObject(writer, "containerCss", containerCss);
+	    Json.writeObject(writer, "containerCssClass", containerCssClass);
+	    Json.writeObject(writer, "dropdownCss", dropdownCss);
+	    Json.writeObject(writer, "dropdownCssClass", dropdownCssClass);
+	    Json.writeObject(writer, "separator", separator);
+	    Json.writeObject(writer, "tokenSeparators", tokenSeparators);
 	    writer.key("ajax");
 	    ajax.toJson(writer);
 

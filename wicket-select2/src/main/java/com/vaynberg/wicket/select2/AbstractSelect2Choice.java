@@ -172,7 +172,7 @@ abstract class AbstractSelect2Choice<T, M> extends HiddenField<M> implements IRe
 	    if (target.getComponents().contains(this)) {
 
 		// if this component is being repainted by ajax, directly, we must destroy Select2 so it removes
-		//its elements from DOM
+		// its elements from DOM
 
 		target.prependJavaScript(JQuery.execute("$('#%s').select2('destroy');", getMarkupId()));
 	    }

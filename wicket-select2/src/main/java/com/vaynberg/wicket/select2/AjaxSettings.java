@@ -30,6 +30,8 @@ public final class AjaxSettings implements Serializable {
     private int quietMillis = 100;
     private String data;
     private String results;
+    /** whether or not to use traditional parameter encoding. */
+    private Boolean traditional;
 
     void toJson(JSONWriter writer) throws JSONException {
 	writer.object();
@@ -38,6 +40,7 @@ public final class AjaxSettings implements Serializable {
 	Json.writeObject(writer, "quietMillis", quietMillis);
 	Json.writeFunction(writer, "results", results);
 	Json.writeObject(writer, "url", url);
+	Json.writeObject(writer, "traditional", traditional);
 	writer.endObject();
     }
 
@@ -81,4 +84,12 @@ public final class AjaxSettings implements Serializable {
 	return results;
     }
 
+    public boolean isTraditional() {
+        return traditional;
+    }
+
+    public void setTraditional(boolean traditional) {
+        this.traditional = traditional;
+    }
+    
 }
