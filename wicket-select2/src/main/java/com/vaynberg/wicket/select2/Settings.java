@@ -26,6 +26,16 @@ import com.vaynberg.wicket.select2.json.Json;
  */
 public final class Settings implements Serializable {
 
+    /**
+     * Some predefined width option values
+     */
+    public static class Widths {
+	public static String OFF = "off";
+	public static String COPY = "copy";
+	public static String RESOLVE = "resolve";
+	public static String ELEMENT = "element";
+    }
+
     private Integer minimumInputLength, minimumResultsForSearch;
     private Integer maximumSelectionSize;
     private Object placeholder;
@@ -235,6 +245,126 @@ public final class Settings implements Serializable {
 
     public void setTags(String tags) {
 	this.tags = tags;
+    }
+
+    public Integer getMaximumSelectionSize() {
+	return maximumSelectionSize;
+    }
+
+    public void setMaximumSelectionSize(Integer maximumSelectionSize) {
+	this.maximumSelectionSize = maximumSelectionSize;
+    }
+
+    public String getMatcher() {
+	return matcher;
+    }
+
+    public void setMatcher(String matcher) {
+	this.matcher = matcher;
+    }
+
+    public String getTokenizer() {
+	return tokenizer;
+    }
+
+    public void setTokenizer(String tokenizer) {
+	this.tokenizer = tokenizer;
+    }
+
+    public String getFormatSelectionTooBig() {
+	return formatSelectionTooBig;
+    }
+
+    public void setFormatSelectionTooBig(String formatSelectionTooBig) {
+	this.formatSelectionTooBig = formatSelectionTooBig;
+    }
+
+    public String getFormatResultCssClass() {
+	return formatResultCssClass;
+    }
+
+    public void setFormatResultCssClass(String formatResultCssClass) {
+	this.formatResultCssClass = formatResultCssClass;
+    }
+
+    public String getFormatLoadMore() {
+	return formatLoadMore;
+    }
+
+    public void setFormatLoadMore(String formatLoadMore) {
+	this.formatLoadMore = formatLoadMore;
+    }
+
+    public String getFormatSearching() {
+	return formatSearching;
+    }
+
+    public void setFormatSearching(String formatSearching) {
+	this.formatSearching = formatSearching;
+    }
+
+    public String getWidth() {
+	return width;
+    }
+
+    public void setWidth(String width) {
+	this.width = width;
+    }
+
+    public Boolean getOpenOnEnter() {
+	return openOnEnter;
+    }
+
+    public void setOpenOnEnter(Boolean openOnEnter) {
+	this.openOnEnter = openOnEnter;
+    }
+
+    public String getContainerCss() {
+	return containerCss;
+    }
+
+    public void setContainerCss(String containerCss) {
+	this.containerCss = containerCss;
+    }
+
+    public String getDropdownCss() {
+	return dropdownCss;
+    }
+
+    public void setDropdownCss(String dropdownCss) {
+	this.dropdownCss = dropdownCss;
+    }
+
+    public String getContainerCssClass() {
+	return containerCssClass;
+    }
+
+    public void setContainerCssClass(String containerCssClass) {
+	this.containerCssClass = containerCssClass;
+    }
+
+    public String getDropdownCssClass() {
+	return dropdownCssClass;
+    }
+
+    public void setDropdownCssClass(String dropdownCssClass) {
+	this.dropdownCssClass = dropdownCssClass;
+    }
+
+    public String getSeparator() {
+	return separator;
+    }
+
+    public void setSeparator(String separator) {
+	this.separator = separator;
+    }
+
+    public String[] getTokenSeparators() {
+	return tokenSeparators;
+    }
+
+    public void setTokenSeparators(String[] tokenSeparators) {
+	this.tokenSeparators = tokenSeparators;
     }
 
 }
