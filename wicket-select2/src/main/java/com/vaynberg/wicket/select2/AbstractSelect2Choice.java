@@ -205,7 +205,7 @@ abstract class AbstractSelect2Choice<T, M> extends HiddenField<M> implements IRe
 	WebResponse webResponse = (WebResponse) rc.getResponse();
 	webResponse.setContentType("application/json");
 
-	OutputStreamWriter out = new OutputStreamWriter(webResponse.getOutputStream());
+	OutputStreamWriter out = new OutputStreamWriter(webResponse.getOutputStream(), getRequest().getCharset());
 	JSONWriter json = new JSONWriter(out);
 
 	try {
