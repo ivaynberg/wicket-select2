@@ -117,13 +117,23 @@ abstract class AbstractSelect2Choice<T, M> extends HiddenField<M> implements IRe
 	return provider;
     }
 
+    /**
+     * Gets the markup id that is safe to use in jQuery by escaping dots in the default {@link #getMarkup()}
+     * 
+     * @return markup id
+     */
+    protected String getJquerySafeMarkupId() {
+	return getMarkupId().replace(".", "\\.");
+    }
+
     @Override
     public void renderHead(IHeaderResponse response) {
 	super.renderHead(response);
 
 	// initialize select2
 
-	response.renderOnDomReadyJavaScript(JQuery.execute("$('#%s').select2(%s);", getMarkupId(), settings.toJson()));
+	response.renderOnDomReadyJavaScript(JQuery.execute("$('#%s').select2(%s);", getJquerySafeMarkupId(),
+		settings.toJson()));
 
 	// select current value
 
@@ -174,7 +184,7 @@ abstract class AbstractSelect2Choice<T, M> extends HiddenField<M> implements IRe
 		// if this component is being repainted by ajax, directly, we must destroy Select2 so it removes
 		// its elements from DOM
 
-		target.prependJavaScript(JQuery.execute("$('#%s').select2('destroy');", getMarkupId()));
+		target.prependJavaScript(JQuery.execute("$('#%s').select2('destroy');", getJquerySafeMarkupId()));
 	    }
 	}
     }
