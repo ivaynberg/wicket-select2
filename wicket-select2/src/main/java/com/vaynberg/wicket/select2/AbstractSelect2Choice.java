@@ -123,7 +123,7 @@ abstract class AbstractSelect2Choice<T, M> extends HiddenField<M> implements IRe
      * @return markup id
      */
     protected String getJquerySafeMarkupId() {
-	return getMarkupId().replace(".", "\\.");
+	return getMarkupId().replace(".", "\\\\.");
     }
 
     @Override
