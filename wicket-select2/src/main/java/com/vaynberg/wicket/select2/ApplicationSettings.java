@@ -32,28 +32,13 @@ import java.util.Arrays;
  */
 public class ApplicationSettings {
 
-    /**
-     * A PackageResourceReference that declares jQuery as a dependency.
-     */
-    private static class JQueryDependentResourceReference extends PackageResourceReference {
-
-        private JQueryDependentResourceReference(String name) {
-            super(ApplicationSettings.class, name);
-        }
-
-        @Override
-        public Iterable<? extends HeaderItem> getDependencies() {
-            // Use Wicket's provided jQuery reference
-            return Arrays.asList(JavaScriptHeaderItem.forReference(
-                    Application.get().getJavaScriptLibrarySettings().getJQueryReference()));
-        }
-    }
-
     private static final MetaDataKey<ApplicationSettings> KEY = new MetaDataKey<ApplicationSettings>() {
     };
 
-    private ResourceReference javaScriptReference = new JQueryDependentResourceReference("res/select2.js");
-    private ResourceReference mouseWheelReference = new JQueryDependentResourceReference("res/jquery.mousewheel.js");
+    private ResourceReference javaScriptReference = new PackageResourceReference(ApplicationSettings.class,
+        "res/select2.js");
+    private ResourceReference mouseWheelReference = new PackageResourceReference(ApplicationSettings.class,
+        "res/jquery.mousewheel.js");
     private ResourceReference cssReference = new PackageResourceReference(ApplicationSettings.class, "res/select2.css");
 
     private boolean includeMouseWheel = true;
