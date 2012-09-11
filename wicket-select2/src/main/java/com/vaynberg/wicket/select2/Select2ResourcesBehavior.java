@@ -12,7 +12,6 @@
  */
 package com.vaynberg.wicket.select2;
 
-import org.apache.wicket.Application;
 import org.apache.wicket.Component;
 import org.apache.wicket.behavior.Behavior;
 import org.apache.wicket.markup.head.CssHeaderItem;
@@ -34,24 +33,12 @@ public class Select2ResourcesBehavior extends Behavior {
 
 	final ApplicationSettings settings = ApplicationSettings.get();
 
-	if (settings.isIncludeJquery()) {
-	    if (Application.get().usesDeploymentConfig()) {
-		response.render(JavaScriptHeaderItem.forReference(settings.getJqueryMinifiedReference()));
-	    } else {
-		response.render(JavaScriptHeaderItem.forReference(settings.getJqueryReference()));
-	    }
-	}
-
 	if (settings.isIncludeMouseWheel()) {
 	    response.render(JavaScriptHeaderItem.forReference(settings.getMouseWheelReference()));
 	}
 
 	if (settings.isIncludeJavascript()) {
-	    if (Application.get().usesDeploymentConfig()) {
-		response.render(JavaScriptHeaderItem.forReference(settings.getJavaScriptMinifiedReference()));
-	    } else {
 		response.render(JavaScriptHeaderItem.forReference(settings.getJavaScriptReference()));
-	    }
 	}
 
 	if (settings.isIncludeCss()) {
