@@ -22,13 +22,4 @@ public class WicketApplication extends WebApplication {
     public Class<HomePage> getHomePage() {
 	return HomePage.class;
     }
-
-    @Override
-    public void init() {
-	super.init();
-
-	// configure select2 application settings
-	
-	ApplicationSettings.get().setIncludeJquery(true);
-    }
 }

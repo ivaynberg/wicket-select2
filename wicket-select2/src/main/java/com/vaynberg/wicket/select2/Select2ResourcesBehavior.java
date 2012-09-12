@@ -15,7 +15,9 @@ package com.vaynberg.wicket.select2;
 import org.apache.wicket.Application;
 import org.apache.wicket.Component;
 import org.apache.wicket.behavior.Behavior;
-import org.apache.wicket.markup.html.IHeaderResponse;
+import org.apache.wicket.markup.head.CssHeaderItem;
+import org.apache.wicket.markup.head.IHeaderResponse;
+import org.apache.wicket.markup.head.JavaScriptHeaderItem;
 
 /**
  * Adds various resources needed by Select2 such as JavaScript and CSS. Which resources are added is controlled by the
@@ -32,28 +34,20 @@ public class Select2ResourcesBehavior extends Behavior {
 
 	final ApplicationSettings settings = ApplicationSettings.get();
 
-	if (settings.isIncludeJquery()) {
-	    if (Application.get().usesDeploymentConfig()) {
-		response.renderJavaScriptReference(settings.getJqueryMinifiedReference());
-	    } else {
-		response.renderJavaScriptReference(settings.getJqueryReference());
-	    }
-	}
+    // Include Wicket's provided jQuery reference
+    response.render(JavaScriptHeaderItem.forReference(
+            Application.get().getJavaScriptLibrarySettings().getJQueryReference()));
 
 	if (settings.isIncludeMouseWheel()) {
-	    response.renderJavaScriptReference(settings.getMouseWheelReference());
+	    response.render(JavaScriptHeaderItem.forReference(settings.getMouseWheelReference()));
 	}
 
 	if (settings.isIncludeJavascript()) {
-	    if (Application.get().usesDeploymentConfig()) {
-		response.renderJavaScriptReference(settings.getJavaScriptMinifiedReference());
-	    } else {
-		response.renderJavaScriptReference(settings.getJavaScriptReference());
-	    }
+		response.render(JavaScriptHeaderItem.forReference(settings.getJavaScriptReference()));
 	}
 
 	if (settings.isIncludeCss()) {
-	    response.renderCSSReference(settings.getCssReference());
+	    response.render(CssHeaderItem.forReference(settings.getCssReference()));
 	}
     }
 
