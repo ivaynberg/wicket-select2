@@ -8,7 +8,7 @@
 	</parent>
 	<groupId>com.vaynberg.wicket.select2</groupId>
 	<artifactId>wicket-select2-parent</artifactId>
-	<version>1.1-SNAPSHOT</version>
+	<version>wicket6-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>Wicket-Select2 Parent</name>
 	<description>Library for integrating Apache Wicket with CDI</description>

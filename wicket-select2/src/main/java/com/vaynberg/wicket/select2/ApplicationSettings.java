@@ -14,9 +14,13 @@ package com.vaynberg.wicket.select2;
 
 import org.apache.wicket.Application;
 import org.apache.wicket.MetaDataKey;
+import org.apache.wicket.markup.head.HeaderItem;
+import org.apache.wicket.markup.head.JavaScriptHeaderItem;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.request.resource.PackageResourceReference;
 import org.apache.wicket.request.resource.ResourceReference;
+
+import java.util.Arrays;
 
 /**
  * Application-wide settings that apply to all Select2 components.
@@ -27,22 +31,16 @@ import org.apache.wicket.request.resource.ResourceReference;
  * @author igor
  */
 public class ApplicationSettings {
+
     private static final MetaDataKey<ApplicationSettings> KEY = new MetaDataKey<ApplicationSettings>() {
     };
 
     private ResourceReference javaScriptReference = new PackageResourceReference(ApplicationSettings.class,
-	    "res/select2.js");
-    private ResourceReference javaScriptMinifiedReference = new PackageResourceReference(ApplicationSettings.class,
-	    "res/select2.min.js");
+        "res/select2.js");
     private ResourceReference mouseWheelReference = new PackageResourceReference(ApplicationSettings.class,
-	    "res/jquery.mousewheel.js");
+        "res/jquery.mousewheel.js");
     private ResourceReference cssReference = new PackageResourceReference(ApplicationSettings.class, "res/select2.css");
-    private ResourceReference jqueryReference = new PackageResourceReference(ApplicationSettings.class,
-	    "res/jquery-1.7.2.js");
-    private ResourceReference jqueryMinifiedReference = new PackageResourceReference(ApplicationSettings.class,
-	    "res/jquery-1.7.2.min.js");
 
-    private boolean includeJquery = true;
     private boolean includeMouseWheel = true;
     private boolean includeJavascript = true;
     private boolean includeCss = true;
@@ -51,15 +49,6 @@ public class ApplicationSettings {
      * Private constructor, use {@link #get()} instead.
      */
     private ApplicationSettings() {
-    }
-
-    public boolean isIncludeJquery() {
-	return includeJquery;
-    }
-
-    public ApplicationSettings setIncludeJquery(boolean includeJquery) {
-	this.includeJquery = includeJquery;
-	return this;
     }
 
     public boolean isIncludeJavascript() {
@@ -98,15 +87,6 @@ public class ApplicationSettings {
 	return this;
     }
 
-    public ResourceReference getJqueryReference() {
-	return jqueryReference;
-    }
-
-    public ApplicationSettings setJqueryReference(ResourceReference jqueryReference) {
-	this.jqueryReference = jqueryReference;
-	return this;
-    }
-
     public boolean isIncludeMouseWheel() {
 	return includeMouseWheel;
     }
@@ -122,24 +102,6 @@ public class ApplicationSettings {
 
     public ApplicationSettings setMouseWheelReference(ResourceReference mousewheelReference) {
 	this.mouseWheelReference = mousewheelReference;
-	return this;
-    }
-
-    public ResourceReference getJavaScriptMinifiedReference() {
-	return javaScriptMinifiedReference;
-    }
-
-    public ApplicationSettings setJavaScriptMinifiedReference(ResourceReference javaScriptMinifiedReference) {
-	this.javaScriptMinifiedReference = javaScriptMinifiedReference;
-	return this;
-    }
-
-    public ResourceReference getJqueryMinifiedReference() {
-	return jqueryMinifiedReference;
-    }
-
-    public ApplicationSettings setJqueryMinifiedReference(ResourceReference jqueryMinifiedReference) {
-	this.jqueryMinifiedReference = jqueryMinifiedReference;
 	return this;
     }
 
