@@ -9,9 +9,11 @@ Installation
 <dependency>
 	<groupId>com.vaynberg.wicket.select2</groupId>
 	<artifactId>wicket-select2</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.0</version>
 </dependency>
 ```
+You may want to check for the latest released version using [Maven Search](http://search.maven.org/#search%7Cga%7C1%7Cwicket-select2)
+
 Configuration
 -------------
 
