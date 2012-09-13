@@ -72,8 +72,20 @@ abstract class AbstractSelect2Choice<T, M> extends HiddenField<M> implements IRe
     }
 
     /**
+     * Constructor.
+     *
+     * @param id
+     *            component id
+     * @param provider
+     *            choice provider
+     */
+    public AbstractSelect2Choice(String id, ChoiceProvider<T> provider) {
+    this(id, null, provider);
+    }
+
+    /**
      * Constructor
-     * 
+     *
      * @param id
      *            component id
      * @param model
@@ -133,7 +145,7 @@ abstract class AbstractSelect2Choice<T, M> extends HiddenField<M> implements IRe
 	// initialize select2
 
 	response.renderOnDomReadyJavaScript(JQuery.execute("$('#%s').select2(%s);", getJquerySafeMarkupId(),
-		settings.toJson()));
+            settings.toJson()));
 
 	// select current value
 
