@@ -3,6 +3,10 @@ Wicket-Select2
 
 This project provides [Apache Wicket](http://wicket.apache.org) components that leverage [Select2](http://ivaynberg.github.com/select2) JavaScript library to build select boxes that provide Ajax choice filtering, custom rendering, etc.
 
+Notable Branches
+----------------
+The 2.x branch contains a version of wicket-select2 compatible with Wicket 6.x
+
 Installation
 ------------
 ```xml
