@@ -34,16 +34,16 @@ public class Select2ResourcesBehavior extends Behavior {
 
 	final ApplicationSettings settings = ApplicationSettings.get();
 
-    // Include Wicket's provided jQuery reference
-    response.render(JavaScriptHeaderItem.forReference(
-            Application.get().getJavaScriptLibrarySettings().getJQueryReference()));
+	// Include Wicket's provided jQuery reference
+	response.render(JavaScriptHeaderItem.forReference(Application.get().getJavaScriptLibrarySettings()
+		.getJQueryReference()));
 
 	if (settings.isIncludeMouseWheel()) {
 	    response.render(JavaScriptHeaderItem.forReference(settings.getMouseWheelReference()));
 	}
 
 	if (settings.isIncludeJavascript()) {
-		response.render(JavaScriptHeaderItem.forReference(settings.getJavaScriptReference()));
+	    response.render(JavaScriptHeaderItem.forReference(settings.getJavaScriptReference()));
 	}
 
 	if (settings.isIncludeCss()) {

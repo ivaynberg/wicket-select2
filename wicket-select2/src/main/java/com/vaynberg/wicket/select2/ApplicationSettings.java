@@ -14,13 +14,9 @@ package com.vaynberg.wicket.select2;
 
 import org.apache.wicket.Application;
 import org.apache.wicket.MetaDataKey;
-import org.apache.wicket.markup.head.HeaderItem;
-import org.apache.wicket.markup.head.JavaScriptHeaderItem;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.request.resource.PackageResourceReference;
 import org.apache.wicket.request.resource.ResourceReference;
-
-import java.util.Arrays;
 
 /**
  * Application-wide settings that apply to all Select2 components.

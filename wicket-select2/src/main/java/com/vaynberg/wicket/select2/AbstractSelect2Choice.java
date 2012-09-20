@@ -24,7 +24,6 @@ import org.apache.wicket.markup.html.form.HiddenField;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.request.IRequestParameters;
 import org.apache.wicket.request.Request;
-import org.apache.wicket.request.cycle.RequestCycle;
 import org.apache.wicket.request.http.WebRequest;
 import org.apache.wicket.request.http.WebResponse;
 import org.json.JSONException;
@@ -203,8 +202,7 @@ abstract class AbstractSelect2Choice<T, M> extends HiddenField<M> implements IRe
 
 	// this is the callback that retrieves matching choices used to populate the dropdown
 
-	RequestCycle rc = RequestCycle.get();
-	Request request = rc.getRequest();
+	Request request = getRequestCycle().getRequest();
 	IRequestParameters params = request.getRequestParameters();
 
 	// retrieve choices matching the search term
@@ -221,7 +219,7 @@ abstract class AbstractSelect2Choice<T, M> extends HiddenField<M> implements IRe
 
 	// jsonize and write out the choices to the response
 
-	WebResponse webResponse = (WebResponse) rc.getResponse();
+	WebResponse webResponse = (WebResponse) getRequestCycle().getResponse();
 	webResponse.setContentType("application/json");
 
 	OutputStreamWriter out = new OutputStreamWriter(webResponse.getOutputStream(), getRequest().getCharset());

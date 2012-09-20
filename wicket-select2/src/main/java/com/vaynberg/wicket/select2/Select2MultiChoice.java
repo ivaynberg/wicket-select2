@@ -109,7 +109,7 @@ public class Select2MultiChoice<T> extends AbstractSelect2Choice<T, Collection<T
 		}
 		selection.endArray();
 	    } catch (JSONException e) {
-		throw new RuntimeException("Error converting model objec to Json", e);
+		throw new RuntimeException("Error converting model object to Json", e);
 	    }
 
 	    response.render(OnDomReadyHeaderItem.forScript(JQuery.execute("$('#%s').select2('data', %s);", getMarkupId(),
