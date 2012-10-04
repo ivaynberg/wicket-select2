@@ -12,9 +12,9 @@
  */
 package com.vaynberg.wicket.select2;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.OnDomReadyHeaderItem;
@@ -53,8 +53,8 @@ public class Select2MultiChoice<T> extends AbstractSelect2Choice<T, Collection<T
 
 	final Collection<T> choices;
 	if (Strings.isEmpty(input)) {
-	    choices = Collections.emptyList();
-	} else {
+        choices = new ArrayList<T>();
+    } else {
 	    choices = getProvider().toChoices(Arrays.asList(input.split(",")));
 	}
 
