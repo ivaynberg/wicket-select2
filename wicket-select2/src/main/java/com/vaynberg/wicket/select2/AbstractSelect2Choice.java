@@ -192,6 +192,21 @@ abstract class AbstractSelect2Choice<T, M> extends HiddenField<M> implements IRe
 			WebRequest.PARAM_AJAX, WebRequest.PARAM_AJAX_BASE_URL));
 
 	ajax.setResults("function(data, page) { return data; }");
+
+    // configure the localized strings/renderers
+    getSettings().setFormatNoMatches("function () { return " + getMessageJS("'noMatches'") + "; }");
+    getSettings().setFormatInputTooShort("function (input, min) { return " + getMessageJS("min - input.length == 1 ? \"inputTooShortSingular\" : \"inputTooShortPlural\"") + ".replace(\"{number}\", min - input.length); }");
+    getSettings().setFormatSelectionTooBig("function (limit) { return " + getMessageJS("limit == 1 ? \"selectionTooBigSingular\" : \"selectionTooBigPlural\"") + ".replace(\"{limit}\", limit); }");
+    getSettings().setFormatLoadMore("function () { return " + getMessageJS("'loadMore'") + "; }");
+    getSettings().setFormatSearching("function () { return " + getMessageJS("'searching'") + "; }");
+    }
+
+    /**
+     * @param key  the lookup key
+     * @return     the Javascript snippet for looking up the localized messages
+     */
+    private String getMessageJS(String key) {
+    return String.format("%s[%s]", "window.Select2.messages", key);
     }
 
     @Override
