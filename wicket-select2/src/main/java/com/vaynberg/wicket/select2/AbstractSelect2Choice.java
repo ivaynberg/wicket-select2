@@ -45,6 +45,11 @@ abstract class AbstractSelect2Choice<T, M> extends HiddenField<M> implements IRe
 
     private ChoiceProvider<T> provider;
 
+    /* Available I18N keys */
+    private static final String[] I18N_KEYS = {
+            "noMatches", "inputTooShortSingular", "inputTooShortPlural",
+            "selectionTooBigSingular", "selectionTooBigPlural", "loadMore", "searching"};
+
     /**
      * Constructor
      * 
@@ -146,6 +151,7 @@ abstract class AbstractSelect2Choice<T, M> extends HiddenField<M> implements IRe
 	// select current value
 
 	renderInitializationScript(response);
+    renderTranslationInitializationScript(response);
     }
 
     /**
@@ -156,6 +162,22 @@ abstract class AbstractSelect2Choice<T, M> extends HiddenField<M> implements IRe
      *            header response
      */
     protected abstract void renderInitializationScript(IHeaderResponse response);
+
+    /**
+     * Retrieves the localized messages (using Wicket's localization mechanics),
+     * constructs a javascript object literal and assigns it to window.Select2.messages.
+     *
+     * @param response
+     */
+    private void renderTranslationInitializationScript(IHeaderResponse response) {
+        String messages = "{";
+        for (String key : I18N_KEYS)
+            messages += "\"" + key + "\":\"" + getString(key) + "\",";
+        // remove last comma
+        messages = messages.substring(0, messages.length() - 1) + "}";
+        response.render(OnDomReadyHeaderItem.forScript(JQuery.execute(
+                "window.Select2.messages = %s", messages)));
+    }
 
     @Override
     protected void onInitialize() {

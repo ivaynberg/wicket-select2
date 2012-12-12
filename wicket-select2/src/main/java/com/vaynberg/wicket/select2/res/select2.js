@@ -489,6 +489,14 @@
     }
 
     /**
+     * @param key   the I18N key
+     * @return      the localized message
+     */
+    function getMessage(key) {
+        return window.Select2.messages[key];
+    }
+
+    /**
      * blurs any Select2 container that has focus when an element outside them was clicked or received focus
      *
      * also takes care of clicks on label tags that point to the source element
@@ -2364,11 +2372,11 @@
             return data ? data.text : undefined;
         },
         formatResultCssClass: function(data) {return undefined;},
-        formatNoMatches: function () { return "No matches found"; },
-        formatInputTooShort: function (input, min) { return "Please enter " + (min - input.length) + " more characters"; },
-        formatSelectionTooBig: function (limit) { return "You can only select " + limit + " item" + (limit == 1 ? "" : "s"); },
-        formatLoadMore: function (pageNumber) { return "Loading more results..."; },
-        formatSearching: function () { return "Searching..."; },
+        formatNoMatches: function () { return getMessage("noMatches"); },
+        formatInputTooShort: function (input, min) { return getMessage(min - input.length == 1 ? "inputTooShortSingular" : "inputTooShortPlural").replace("{number}", min - input.length); },
+        formatSelectionTooBig: function (limit) { return getMessage(limit == 1 ? "selectionTooBigSingular" : "selectionTooBigPlural").replace("{limit}", limit); },
+        formatLoadMore: function (pageNumber) { return getMessage("loadMore"); },
+        formatSearching: function () { return getMessage("searching"); },
         minimumResultsForSearch: 0,
         minimumInputLength: 0,
         maximumSelectionSize: 0,
