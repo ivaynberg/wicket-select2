@@ -16,7 +16,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
-import org.apache.wicket.markup.html.IHeaderResponse;
+import org.apache.wicket.markup.head.IHeaderResponse;
+import org.apache.wicket.markup.head.OnDomReadyHeaderItem;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.util.string.Strings;
 import org.json.JSONException;
@@ -108,11 +109,11 @@ public class Select2MultiChoice<T> extends AbstractSelect2Choice<T, Collection<T
 		}
 		selection.endArray();
 	    } catch (JSONException e) {
-		throw new RuntimeException("Error converting model objec to Json", e);
+		throw new RuntimeException("Error converting model object to Json", e);
 	    }
 
-	    response.renderOnDomReadyJavaScript(JQuery.execute("$('#%s').select2('data', %s);", getMarkupId(),
-		    selection.toJson()));
+	    response.render(OnDomReadyHeaderItem.forScript(JQuery.execute("$('#%s').select2('data', %s);", getMarkupId(),
+		    selection.toJson())));
 	}
     }
 
