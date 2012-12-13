@@ -53,8 +53,8 @@ public class Select2MultiChoice<T> extends AbstractSelect2Choice<T, Collection<T
 
 	final Collection<T> choices;
 	if (Strings.isEmpty(input)) {
-        choices = new ArrayList<T>();
-    } else {
+	    choices = new ArrayList<T>();
+	} else {
 	    choices = getProvider().toChoices(Arrays.asList(input.split(",")));
 	}
 
@@ -84,18 +84,18 @@ public class Select2MultiChoice<T> extends AbstractSelect2Choice<T, Collection<T
     @Override
     protected String getModelValue() {
 	Collection<T> values = getModelObject();
-	
+
 	// if values is null or empty set value attribute to an empty string rather then '[]' which does not make sense
 	if (values == null || values.isEmpty()) {
 	    return "";
 	}
-	
+
 	return super.getModelValue();
     }
 
     @Override
     protected void renderInitializationScript(IHeaderResponse response) {
-	Collection<? extends T> choices = getModelObject();
+	Collection<? extends T> choices = hasRawInput() ? getConvertedInput() : getModelObject();
 	if (choices != null && !choices.isEmpty()) {
 
 	    JsonBuilder selection = new JsonBuilder();
@@ -112,8 +112,8 @@ public class Select2MultiChoice<T> extends AbstractSelect2Choice<T, Collection<T
 		throw new RuntimeException("Error converting model object to Json", e);
 	    }
 
-	    response.render(OnDomReadyHeaderItem.forScript(JQuery.execute("$('#%s').select2('data', %s);", getMarkupId(),
-		    selection.toJson())));
+	    response.render(OnDomReadyHeaderItem.forScript(JQuery.execute("$('#%s').select2('data', %s);",
+		    getMarkupId(), selection.toJson())));
 	}
     }
 
