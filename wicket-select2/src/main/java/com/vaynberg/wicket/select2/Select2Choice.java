@@ -58,10 +58,7 @@ public class Select2Choice<T> extends AbstractSelect2Choice<T, T> {
     @Override
     protected void renderInitializationScript(IHeaderResponse response) {
     	
-    	T state = getConvertedInput();
-    	if (state == null) {
-    	    state = getModelObject();
-    	}
+	T state = hasRawInput() ? getConvertedInput() : getModelObject();
     	
 	if (state != null) {
 
