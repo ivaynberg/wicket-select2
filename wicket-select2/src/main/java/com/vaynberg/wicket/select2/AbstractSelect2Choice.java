@@ -45,10 +45,6 @@ abstract class AbstractSelect2Choice<T, M> extends HiddenField<M> implements IRe
 
     private ChoiceProvider<T> provider;
 
-    /* Available I18N keys */
-    private static final String[] I18N_KEYS = {
-            "noMatches", "inputTooShortSingular", "inputTooShortPlural",
-            "selectionTooBigSingular", "selectionTooBigPlural", "loadMore", "searching"};
 
     /**
      * Constructor
@@ -151,7 +147,6 @@ abstract class AbstractSelect2Choice<T, M> extends HiddenField<M> implements IRe
 	// select current value
 
 	renderInitializationScript(response);
-    renderTranslationInitializationScript(response);
     }
 
     /**
@@ -162,22 +157,6 @@ abstract class AbstractSelect2Choice<T, M> extends HiddenField<M> implements IRe
      *            header response
      */
     protected abstract void renderInitializationScript(IHeaderResponse response);
-
-    /**
-     * Retrieves the localized messages (using Wicket's localization mechanics),
-     * constructs a javascript object literal and assigns it to window.Select2.messages.
-     *
-     * @param response
-     */
-    private void renderTranslationInitializationScript(IHeaderResponse response) {
-        String messages = "{";
-        for (String key : I18N_KEYS)
-            messages += "\"" + key + "\":\"" + getString(key) + "\",";
-        // remove last comma
-        messages = messages.substring(0, messages.length() - 1) + "}";
-        response.render(OnDomReadyHeaderItem.forScript(JQuery.execute(
-                "window.Select2.messages = %s", messages)));
-    }
 
     @Override
     protected void onInitialize() {
@@ -194,19 +173,11 @@ abstract class AbstractSelect2Choice<T, M> extends HiddenField<M> implements IRe
 	ajax.setResults("function(data, page) { return data; }");
 
     // configure the localized strings/renderers
-    getSettings().setFormatNoMatches("function () { return " + getMessageJS("'noMatches'") + "; }");
-    getSettings().setFormatInputTooShort("function (input, min) { return " + getMessageJS("min - input.length == 1 ? \"inputTooShortSingular\" : \"inputTooShortPlural\"") + ".replace(\"{number}\", min - input.length); }");
-    getSettings().setFormatSelectionTooBig("function (limit) { return " + getMessageJS("limit == 1 ? \"selectionTooBigSingular\" : \"selectionTooBigPlural\"") + ".replace(\"{limit}\", limit); }");
-    getSettings().setFormatLoadMore("function () { return " + getMessageJS("'loadMore'") + "; }");
-    getSettings().setFormatSearching("function () { return " + getMessageJS("'searching'") + "; }");
-    }
-
-    /**
-     * @param key  the lookup key
-     * @return     the Javascript snippet for looking up the localized messages
-     */
-    private String getMessageJS(String key) {
-    return String.format("%s[%s]", "window.Select2.messages", key);
+    getSettings().setFormatNoMatches("function() { return '" + getString("noMatches") + "';}");
+    getSettings().setFormatInputTooShort("function(input, min) { return min - input.length == 1 ? '" +getString("inputTooShortSingular") + "' : '" + getString("inputTooShortPlural") + "'.replace('{number}', min - input.length); }");
+    getSettings().setFormatSelectionTooBig("function(limit) { return limit == 1 ? '" + getString("selectionTooBigSingular") + "' : '" + getString("selectionTooBigPlural") + "'.replace('{limit}', limit); }");
+    getSettings().setFormatLoadMore("function() { return '" + getString("loadMore") + "';}");
+    getSettings().setFormatSearching("function() { return '" + getString("searching") + "';}");
     }
 
     @Override
