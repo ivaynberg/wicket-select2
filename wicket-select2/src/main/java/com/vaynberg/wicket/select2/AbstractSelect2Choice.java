@@ -45,6 +45,7 @@ abstract class AbstractSelect2Choice<T, M> extends HiddenField<M> implements IRe
 
     private ChoiceProvider<T> provider;
 
+
     /**
      * Constructor
      * 
@@ -170,6 +171,13 @@ abstract class AbstractSelect2Choice<T, M> extends HiddenField<M> implements IRe
 			WebRequest.PARAM_AJAX, WebRequest.PARAM_AJAX_BASE_URL));
 
 	ajax.setResults("function(data, page) { return data; }");
+
+    // configure the localized strings/renderers
+    getSettings().setFormatNoMatches("function() { return '" + getString("noMatches") + "';}");
+    getSettings().setFormatInputTooShort("function(input, min) { return min - input.length == 1 ? '" +getString("inputTooShortSingular") + "' : '" + getString("inputTooShortPlural") + "'.replace('{number}', min - input.length); }");
+    getSettings().setFormatSelectionTooBig("function(limit) { return limit == 1 ? '" + getString("selectionTooBigSingular") + "' : '" + getString("selectionTooBigPlural") + "'.replace('{limit}', limit); }");
+    getSettings().setFormatLoadMore("function() { return '" + getString("loadMore") + "';}");
+    getSettings().setFormatSearching("function() { return '" + getString("searching") + "';}");
     }
 
     @Override
