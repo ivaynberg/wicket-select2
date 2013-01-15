@@ -30,9 +30,9 @@ public class Response<T> implements Iterable<T> {
     private Boolean hasMore;
 
     /**
-     * Constructor. Package-private, should be created by the Select2 components.
+     * Constructor. Should be created by the Select2 components.
      */
-    Response() {
+    public Response() {
 
     }
 
