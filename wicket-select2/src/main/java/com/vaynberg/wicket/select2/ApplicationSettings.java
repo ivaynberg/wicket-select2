@@ -35,11 +35,15 @@ public class ApplicationSettings {
         "res/select2.js");
     private ResourceReference mouseWheelReference = new PackageResourceReference(ApplicationSettings.class,
         "res/jquery.mousewheel.js");
-    private ResourceReference cssReference = new PackageResourceReference(ApplicationSettings.class, "res/select2.css");
+    private ResourceReference cssReference = new PackageResourceReference(ApplicationSettings.class,
+        "res/select2.css");
+    private ResourceReference jqueryUIReference = new PackageResourceReference(ApplicationSettings.class,
+        "res/jquery-ui-1.9.0.min.js");
 
     private boolean includeMouseWheel = true;
     private boolean includeJavascript = true;
     private boolean includeCss = true;
+    private boolean includeJqueryUI = true;
 
     /**
      * Private constructor, use {@link #get()} instead.
@@ -63,6 +67,15 @@ public class ApplicationSettings {
     public ApplicationSettings setIncludeCss(boolean includeCss) {
 	this.includeCss = includeCss;
 	return this;
+    }
+
+    public boolean isIncludeJqueryUI() {
+    return includeJqueryUI;
+    }
+
+    public ApplicationSettings setIncludeJqueryUI(boolean includeJqueryUI) {
+    this.includeJqueryUI = includeJqueryUI;
+    return this;
     }
 
     public ResourceReference getJavaScriptReference() {
@@ -99,6 +112,15 @@ public class ApplicationSettings {
     public ApplicationSettings setMouseWheelReference(ResourceReference mousewheelReference) {
 	this.mouseWheelReference = mousewheelReference;
 	return this;
+    }
+
+    public ResourceReference getJqueryUIReference() {
+    return jqueryUIReference;
+    }
+
+    public ApplicationSettings setJqueryUIReference(ResourceReference jqueryUIReference) {
+    this.jqueryUIReference = jqueryUIReference;
+    return this;
     }
 
     /**
