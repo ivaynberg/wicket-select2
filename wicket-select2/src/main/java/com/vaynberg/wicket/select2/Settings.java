@@ -221,7 +221,7 @@ public final class Settings implements Serializable {
     }
 
     public AjaxSettings getAjax(boolean createIfNotSet) {
-	if (createIfNotSet) {
+	if (createIfNotSet && ajax == null) {
 	    ajax = new AjaxSettings();
 	}
 	return ajax;
