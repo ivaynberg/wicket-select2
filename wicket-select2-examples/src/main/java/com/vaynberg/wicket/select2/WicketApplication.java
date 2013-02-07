@@ -18,8 +18,26 @@ import org.apache.wicket.protocol.http.WebApplication;
  * Application object
  */
 public class WicketApplication extends WebApplication {
+    
+    public static final String COUNTRIES_MOUNT_PATH  = "/countries/";
+    
     @Override
     public Class<HomePage> getHomePage() {
 	return HomePage.class;
+    }
+    
+    @Override
+    protected void init() {
+        super.init();
+        
+        mountResource(COUNTRIES_MOUNT_PATH, new JsonResourceReference<Country>() {
+            
+	    private static final long serialVersionUID = 1L;
+
+	    @Override
+            protected ChoiceProvider<Country> getChoiceProvider() {
+                return new HomePage.CountriesProvider();
+            }
+	});
     }
 }

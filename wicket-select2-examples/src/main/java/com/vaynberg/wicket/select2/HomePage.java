@@ -21,7 +21,6 @@ import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.model.PropertyModel;
-import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 /**
  * Example page.
@@ -35,6 +34,9 @@ public class HomePage extends WebPage {
 
     private Country country = Country.US;
     private List<Country> countries = new ArrayList<Country>(Arrays.asList(new Country[] { Country.US, Country.CA }));
+    
+    private List<Country> countriesStateless = new ArrayList<Country>(Arrays.asList(new Country[] { Country.US, Country.CA }));
+    
 
     public HomePage() {
 
@@ -60,9 +62,21 @@ public class HomePage extends WebPage {
 	Select2MultiChoice<Country> countries = new Select2MultiChoice<Country>("countries",
 		new PropertyModel<Collection<Country>>(this, "countries"), new CountriesProvider());
 	countries.getSettings().setMinimumInputLength(1);
-    countries.add(new DragAndDropBehavior());
+	countries.add(new DragAndDropBehavior());
 	multi.add(countries);
 
+	
+	add(new Label("countriesStateless", new PropertyModel<Object>(this, "countriesStateless")));
+
+	Form<?> multiStateless = new Form<Void>("multiStateless");
+	add(multiStateless);
+
+	Select2MultiChoice<Country> countriesStateless = new Select2MultiChoice<Country>("countriesStateless",
+		new PropertyModel<Collection<Country>>(this, "countriesStateless"), new CountriesProvider());
+	countriesStateless.getSettings().setMinimumInputLength(1);
+	countriesStateless.getSettings().setStateless(true);
+	countriesStateless.getSettings().setMountPath(WicketApplication.COUNTRIES_MOUNT_PATH);	
+	multiStateless.add(countriesStateless);
     }
 
     /**
@@ -108,7 +122,7 @@ public class HomePage extends WebPage {
      * @author igor
      * 
      */
-    public class CountriesProvider extends TextChoiceProvider<Country> {
+    public static class CountriesProvider extends TextChoiceProvider<Country> {
 
 	@Override
 	protected String getDisplayText(Country choice) {
@@ -136,5 +150,13 @@ public class HomePage extends WebPage {
 	    return countries;
 	}
 
+    }
+
+    public List<Country> getCountriesStateless() {
+        return countriesStateless;
+    }
+
+    public void setCountriesStateless(List<Country> countriesStateless) {
+        this.countriesStateless = countriesStateless;
     }
 }
