@@ -29,10 +29,7 @@ public class Response<T> implements Iterable<T> {
     private List<T> results = new ArrayList<T>();
     private Boolean hasMore;
 
-    /**
-     * Constructor. Package-private, should be created by the Select2 components.
-     */
-    Response() {
+    public Response() {
 
     }
 
