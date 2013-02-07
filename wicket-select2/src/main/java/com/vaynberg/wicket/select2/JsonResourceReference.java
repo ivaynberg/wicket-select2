@@ -5,7 +5,6 @@ import java.io.ByteArrayOutputStream;
 import org.apache.wicket.request.resource.IResource;
 import org.apache.wicket.request.resource.ResourceReference;
 import org.apache.wicket.request.resource.ResourceStreamResource;
-import org.apache.wicket.util.resource.IResourceStream;
 import org.apache.wicket.util.resource.StringResourceStream;
 
 
@@ -51,26 +50,14 @@ public abstract class JsonResourceReference<T> extends ResourceReference {
 	    ByteArrayOutputStream webResponse = new ByteArrayOutputStream();
 	    AbstractSelect2Choice.generateJSON(getChoiceProvider(), webResponse);
 	    StringResourceStream resourceStream = new StringResourceStream(webResponse.toString(), "application/json");
-	    return new ImageResource(resourceStream);
+	    return new ResourceStreamResource(resourceStream);
 	}
-	
-	protected abstract ChoiceProvider<T> getChoiceProvider();
 
 	/**
-	 * A resource which shows how to return back the image as bytes. For the
-	 * demo it generates the image on the fly but in real life the image can be
-	 * read from DB, file system, Internet, ...
+	 * The choice provider.
+	 * 
+	 * @return
 	 */
-	@SuppressWarnings("serial")
-	private static class ImageResource extends ResourceStreamResource {
+	protected abstract ChoiceProvider<T> getChoiceProvider();
 
-		/**
-		 * 
-		 * @param stream
-		 */
-		public ImageResource(IResourceStream stream) {
-		 super(stream);
-		}
-		
-	}
 }
