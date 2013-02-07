@@ -22,6 +22,7 @@ import org.json.JSONWriter;
  * 
  * @param <T> type of choice object
  */
+@SuppressWarnings("serial")
 public abstract class TextChoiceProvider<T> extends ChoiceProvider<T> {
 
     protected abstract String getDisplayText(T choice);

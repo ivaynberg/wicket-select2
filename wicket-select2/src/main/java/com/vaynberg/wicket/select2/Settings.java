@@ -24,6 +24,7 @@ import com.vaynberg.wicket.select2.json.Json;
  * 
  * @author igor
  */
+@SuppressWarnings("serial")
 public final class Settings implements Serializable {
 
     /**
@@ -57,6 +58,17 @@ public final class Settings implements Serializable {
     private String tags;
     private String separator;
     private String[] tokenSeparators;
+    
+    /**
+     * If stateless is set to true then component will not be used as context 
+     * for serving JSON.
+     */
+    private boolean stateless = false; 
+    
+    /**
+     * Path to which JSON producing resource will be attached.
+     */
+    private String mountPath;
 
     public CharSequence toJson() {
 	try {
@@ -221,7 +233,7 @@ public final class Settings implements Serializable {
     }
 
     public AjaxSettings getAjax(boolean createIfNotSet) {
-	if (createIfNotSet && ajax == null) {
+	if (createIfNotSet) {
 	    ajax = new AjaxSettings();
 	}
 	return ajax;
@@ -366,5 +378,21 @@ public final class Settings implements Serializable {
     public void setTokenSeparators(String[] tokenSeparators) {
 	this.tokenSeparators = tokenSeparators;
     }
+
+	public boolean isStateless() {
+		return stateless;
+	}
+
+	public void setStateless(boolean stateless) {
+		this.stateless = stateless;
+	}
+
+	public String getMountPath() {
+		return mountPath;
+	}
+
+	public void setMountPath(String mountPath) {
+		this.mountPath = mountPath;
+	}
 
 }

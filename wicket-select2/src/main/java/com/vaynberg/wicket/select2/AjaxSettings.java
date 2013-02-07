@@ -24,6 +24,7 @@ import com.vaynberg.wicket.select2.json.Json;
  * 
  * @author igor
  */
+@SuppressWarnings("serial")
 public final class AjaxSettings implements Serializable {
     private CharSequence url;
     private String dataType = "json";

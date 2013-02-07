@@ -13,6 +13,7 @@
 package com.vaynberg.wicket.select2;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 
 import org.apache.wicket.IResourceListener;
@@ -24,8 +25,10 @@ import org.apache.wicket.markup.html.form.HiddenField;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.request.IRequestParameters;
 import org.apache.wicket.request.Request;
+import org.apache.wicket.request.cycle.RequestCycle;
 import org.apache.wicket.request.http.WebRequest;
 import org.apache.wicket.request.http.WebResponse;
+import org.apache.wicket.util.string.Strings;
 import org.json.JSONException;
 import org.json.JSONWriter;
 
@@ -39,6 +42,7 @@ import org.json.JSONWriter;
  * @param <M>
  *            type of model object
  */
+@SuppressWarnings("serial")
 abstract class AbstractSelect2Choice<T, M> extends HiddenField<M> implements IResourceListener {
 
     private final Settings settings = new Settings();
@@ -147,6 +151,11 @@ abstract class AbstractSelect2Choice<T, M> extends HiddenField<M> implements IRe
 
 	renderInitializationScript(response);
     }
+    
+    @Override
+    protected boolean getStatelessHint() {
+    	return settings.isStateless();
+    }
 
     /**
      * Renders script used to initialize the value of Select2 after it is created so it matches the current model
@@ -170,20 +179,19 @@ abstract class AbstractSelect2Choice<T, M> extends HiddenField<M> implements IRe
 			WebRequest.PARAM_AJAX, WebRequest.PARAM_AJAX_BASE_URL));
 
 	ajax.setResults("function(data, page) { return data; }");
-
-    // configure the localized strings/renderers
-    getSettings().setFormatNoMatches("function() { return '" + getString("noMatches") + "';}");
-    getSettings().setFormatInputTooShort("function(input, min) { return min - input.length == 1 ? '" +getString("inputTooShortSingular") + "' : '" + getString("inputTooShortPlural") + "'.replace('{number}', min - input.length); }");
-    getSettings().setFormatSelectionTooBig("function(limit) { return limit == 1 ? '" + getString("selectionTooBigSingular") + "' : '" + getString("selectionTooBigPlural") + "'.replace('{limit}', limit); }");
-    getSettings().setFormatLoadMore("function() { return '" + getString("loadMore") + "';}");
-    getSettings().setFormatSearching("function() { return '" + getString("searching") + "';}");
     }
 
     @Override
     protected void onConfigure() {
 	super.onConfigure();
-
-	getSettings().getAjax().setUrl(urlFor(IResourceListener.INTERFACE, null));
+	if(getSettings().isStateless()) {
+		if(Strings.isEmpty(getSettings().getMountPath())) {
+			  throw new IllegalStateException("Select2 in stateless mode should specify a mountPath");
+		}
+		getSettings().getAjax().setUrl(getSettings().getMountPath());		
+	} else {
+		getSettings().getAjax().setUrl(urlFor(IResourceListener.INTERFACE, null));
+	}
     }
 
     @Override
@@ -205,11 +213,22 @@ abstract class AbstractSelect2Choice<T, M> extends HiddenField<M> implements IRe
     }
 
     @Override
-    public void onResourceRequested() {
-
+    public void onResourceRequested() {	
+	WebResponse webResponse = (WebResponse) getRequestCycle().getResponse();
+	webResponse.setContentType("application/json");
+	generateJSON(provider, webResponse.getOutputStream());	
+    }
+    
+    /**
+     * Utility method to generate JSON response.
+     * 
+     * @param provider
+     * @param outputStream
+     */
+    public static <T> void generateJSON(ChoiceProvider<T> provider, OutputStream outputStream) {
 	// this is the callback that retrieves matching choices used to populate the dropdown
 
-	Request request = getRequestCycle().getRequest();
+	Request request = RequestCycle.get().getRequest();
 	IRequestParameters params = request.getRequestParameters();
 
 	// retrieve choices matching the search term
@@ -226,10 +245,7 @@ abstract class AbstractSelect2Choice<T, M> extends HiddenField<M> implements IRe
 
 	// jsonize and write out the choices to the response
 
-	WebResponse webResponse = (WebResponse) getRequestCycle().getResponse();
-	webResponse.setContentType("application/json");
-
-	OutputStreamWriter out = new OutputStreamWriter(webResponse.getOutputStream(), getRequest().getCharset());
+	OutputStreamWriter out = new OutputStreamWriter(outputStream, request.getCharset());
 	JSONWriter json = new JSONWriter(out);
 
 	try {

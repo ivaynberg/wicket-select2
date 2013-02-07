@@ -32,18 +32,35 @@ import com.vaynberg.wicket.select2.json.JsonBuilder;
  * @param <T>
  *            type of choice object
  */
+@SuppressWarnings("serial")
 public class Select2MultiChoice<T> extends AbstractSelect2Choice<T, Collection<T>> {
 
+	/**
+	 * Construct.
+	 * @param id
+	 * @param model
+	 * @param provider
+	 */
     public Select2MultiChoice(String id, IModel<Collection<T>> model, ChoiceProvider<T> provider) {
-	super(id, model, provider);
+    	super(id, model, provider);
     }
 
+    /**
+     * Construct.
+     * @param id
+     * @param model
+     */
     public Select2MultiChoice(String id, IModel<Collection<T>> model) {
-	super(id, model);
+    	super(id, model);
     }
 
+    /**
+     * Construct.
+     * 
+     * @param id
+     */
     public Select2MultiChoice(String id) {
-	super(id);
+    	super(id);
     }
 
     @Override

@@ -7,6 +7,7 @@ import java.util.Collection;
  *
  * @author Tom Götz (tom@decoded.de)
  */
+@SuppressWarnings("serial")
 public abstract class StringTextChoiceProvider extends TextChoiceProvider<String> {
 
     @Override
