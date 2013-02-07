@@ -32,7 +32,9 @@ import com.vaynberg.wicket.select2.json.JsonBuilder;
  */
 public class Select2Choice<T> extends AbstractSelect2Choice<T, T> {
 
-    public Select2Choice(String id, IModel<T> model, ChoiceProvider<T> provider) {
+    private static final long serialVersionUID = 1L;
+
+	public Select2Choice(String id, IModel<T> model, ChoiceProvider<T> provider) {
 	super(id, model, provider);
     }
 

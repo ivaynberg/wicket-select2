@@ -27,6 +27,7 @@ import org.apache.wicket.markup.head.JavaScriptHeaderItem;
  * @author igor
  * 
  */
+@SuppressWarnings("serial")
 public class Select2ResourcesBehavior extends Behavior {
 
     @Override

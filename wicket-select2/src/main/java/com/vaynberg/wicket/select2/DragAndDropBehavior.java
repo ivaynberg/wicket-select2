@@ -12,6 +12,7 @@ import org.apache.wicket.markup.head.OnDomReadyHeaderItem;
  *
  * @author Tom Götz (tom@decoded.de)
  */
+@SuppressWarnings("serial")
 public class DragAndDropBehavior extends Behavior {
 
     @Override

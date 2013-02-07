@@ -28,7 +28,8 @@ import org.apache.wicket.request.resource.ResourceReference;
  */
 public class ApplicationSettings {
 
-    private static final MetaDataKey<ApplicationSettings> KEY = new MetaDataKey<ApplicationSettings>() {
+    @SuppressWarnings("serial")
+	private static final MetaDataKey<ApplicationSettings> KEY = new MetaDataKey<ApplicationSettings>() {
     };
 
     private ResourceReference javaScriptReference = new PackageResourceReference(ApplicationSettings.class,
