@@ -91,9 +91,10 @@ public final class Settings implements Serializable {
 	    Json.writeObject(writer, "dropdownCssClass", dropdownCssClass);
 	    Json.writeObject(writer, "separator", separator);
 	    Json.writeObject(writer, "tokenSeparators", tokenSeparators);
-	    writer.key("ajax");
-	    ajax.toJson(writer);
-
+	    if (ajax != null) {
+		writer.key("ajax");
+		ajax.toJson(writer);
+	    }
 	    Json.writeFunction(writer, "data", data);
 	    Json.writeFunction(writer, "tags", tags);
 	    writer.endObject();
