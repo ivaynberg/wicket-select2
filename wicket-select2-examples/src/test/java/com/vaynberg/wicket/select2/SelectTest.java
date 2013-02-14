@@ -2,7 +2,6 @@ package com.vaynberg.wicket.select2;
 
 import junit.framework.Assert;
 
-import org.apache.wicket.core.request.handler.IPageProvider;
 import org.apache.wicket.util.tester.WicketTester;
 import org.junit.Before;
 import org.junit.Test;
