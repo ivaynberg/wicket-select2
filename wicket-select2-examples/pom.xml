@@ -4,11 +4,11 @@
 	<parent>
 		<artifactId>wicket-select2-parent</artifactId>
 		<groupId>com.vaynberg.wicket.select2</groupId>
-		<version>2.2.2</version>
+		<version>2.3-SNAPSHOT</version>
 	</parent>
 	<groupId>com.vaynberg.wicket.select2</groupId>
 	<artifactId>wicket-select2-examples</artifactId>
-	<version>2.2.2</version>
+	<version>2.3-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<name>Wicket-Select2 Examples</name>
 	<url>https://github.com/ivaynberg/wicket-select2</url>
