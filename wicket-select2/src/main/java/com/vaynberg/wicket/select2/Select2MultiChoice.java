@@ -95,7 +95,14 @@ public class Select2MultiChoice<T> extends AbstractSelect2Choice<T, Collection<T
 
     @Override
     protected void renderInitializationScript(IHeaderResponse response) {
-	Collection<? extends T> choices = hasRawInput() ? getConvertedInput() : getModelObject();
+	Collection<? extends T> choices;
+	if (hasRawInput()) {
+	    convertInput();
+	    choices=getConvertedInput();
+	} else {
+	    choices=getModelObject();
+	}
+	
 	if (choices != null && !choices.isEmpty()) {
 
 	    JsonBuilder selection = new JsonBuilder();

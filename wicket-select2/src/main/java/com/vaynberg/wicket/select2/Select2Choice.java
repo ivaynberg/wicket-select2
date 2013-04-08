@@ -57,23 +57,28 @@ public class Select2Choice<T> extends AbstractSelect2Choice<T, T> {
 
     @Override
     protected void renderInitializationScript(IHeaderResponse response) {
-    	
-	T state = hasRawInput() ? getConvertedInput() : getModelObject();
-    	
-	if (state != null) {
+
+	T value;
+	if (hasRawInput()) {
+	    convertInput();
+	    value = getConvertedInput();
+	} else {
+	    value = getModelObject();
+	}
+
+	if (value != null) {
 
 	    JsonBuilder selection = new JsonBuilder();
 
 	    try {
 		selection.object();
-		getProvider().toJson(state, selection);
+		getProvider().toJson(value, selection);
 		selection.endObject();
 	    } catch (JSONException e) {
 		throw new RuntimeException("Error converting model object to Json", e);
 	    }
-	    response.render(OnDomReadyHeaderItem.forScript(JQuery.execute("$('#%s').select2('data', %s);", getMarkupId(),
-		    selection.toJson())));
+	    response.render(OnDomReadyHeaderItem.forScript(JQuery.execute("$('#%s').select2('data', %s);",
+		    getMarkupId(), selection.toJson())));
 	}
     }
-
 }
