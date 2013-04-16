@@ -5,7 +5,7 @@ This project provides [Apache Wicket](http://wicket.apache.org) components that 
 
 Notable Branches
 ----------------
-The 2.x branch contains a version of wicket-select2 compatible with Wicket 6.x
+The 1.x branch contains a version of wicket-select2 compatible with Wicket 1.5.x
 
 Installation
 ------------
@@ -13,10 +13,10 @@ Installation
 <dependency>
 	<groupId>com.vaynberg.wicket.select2</groupId>
 	<artifactId>wicket-select2</artifactId>
-	<version>1.0</version>
+	<version>2.2.2</version>
 </dependency>
 ```
-You may want to check for the latest released version using [Maven Search](http://search.maven.org/#search%7Cga%7C1%7Cwicket-select2)
+You may want to check for the latest released version using [Maven Search](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22com.vaynberg.wicket.select2%22%20AND%20a%3A%22wicket-select2%22)
 
 Configuration
 -------------
