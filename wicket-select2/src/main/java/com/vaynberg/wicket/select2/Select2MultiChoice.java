@@ -120,7 +120,7 @@ public class Select2MultiChoice<T> extends AbstractSelect2Choice<T, Collection<T
 	    }
 
 	    response.render(OnDomReadyHeaderItem.forScript(JQuery.execute("$('#%s').select2('data', %s);",
-		    getMarkupId(), selection.toJson())));
+		    getJquerySafeMarkupId(), selection.toJson())));
 	}
     }
 

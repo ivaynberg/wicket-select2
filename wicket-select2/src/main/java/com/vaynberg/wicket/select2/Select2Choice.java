@@ -78,7 +78,7 @@ public class Select2Choice<T> extends AbstractSelect2Choice<T, T> {
 		throw new RuntimeException("Error converting model object to Json", e);
 	    }
 	    response.render(OnDomReadyHeaderItem.forScript(JQuery.execute("$('#%s').select2('data', %s);",
-		    getMarkupId(), selection.toJson())));
+		    getJquerySafeMarkupId(), selection.toJson())));
 	}
     }
 }
