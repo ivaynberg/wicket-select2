@@ -43,6 +43,7 @@ public final class Settings implements Serializable {
     private Boolean multiple;
     private Boolean closeOnSelect;
     private String id, matcher, tokenizer;
+    private String sortResults;
     private String formatSelection, formatSelectionTooBig, formatResult, formatNoMatches, formatInputTooShort,
 	    formatResultCssClass, formatLoadMore, formatSearching, escapeMarkup;
     private String createSearchChoice;
@@ -72,6 +73,7 @@ public final class Settings implements Serializable {
 	    Json.writeFunction(writer, "id", id);
 	    Json.writeFunction(writer, "matcher", matcher);
 	    Json.writeFunction(writer, "tokenizer", tokenizer);
+	    Json.writeFunction(writer, "sortResults", sortResults);
 	    Json.writeFunction(writer, "formatSelection", formatSelection);
 	    Json.writeFunction(writer, "formatResult", formatResult);
 	    Json.writeFunction(writer, "formatNoMatches", formatNoMatches);
@@ -271,6 +273,14 @@ public final class Settings implements Serializable {
 
     public void setTokenizer(String tokenizer) {
 	this.tokenizer = tokenizer;
+    }
+    
+    public String getSortResults() {
+    	return sortResults;
+    }
+    
+    public void setSortResults(String sortResults) {
+    	this.sortResults = sortResults;
     }
 
     public String getFormatSelectionTooBig() {
