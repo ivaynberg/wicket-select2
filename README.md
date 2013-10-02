@@ -13,7 +13,7 @@ Installation
 <dependency>
 	<groupId>com.vaynberg.wicket.select2</groupId>
 	<artifactId>wicket-select2</artifactId>
-	<version>2.2.2</version>
+	<version>2.2.3</version>
 </dependency>
 ```
 You may want to check for the latest released version using [Maven Search](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22com.vaynberg.wicket.select2%22%20AND%20a%3A%22wicket-select2%22)
