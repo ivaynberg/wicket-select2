@@ -89,9 +89,9 @@ public final class Settings implements Serializable {
 	    Json.writeFunction(writer, "query", query);
 	    Json.writeObject(writer, "width", width);
 	    Json.writeObject(writer, "openOnEnter", openOnEnter);
-	    Json.writeObject(writer, "containerCss", containerCss);
+	    Json.writeFunction(writer, "containerCss", containerCss);
 	    Json.writeObject(writer, "containerCssClass", containerCssClass);
-	    Json.writeObject(writer, "dropdownCss", dropdownCss);
+	    Json.writeFunction(writer, "dropdownCss", dropdownCss);
 	    Json.writeObject(writer, "dropdownCssClass", dropdownCssClass);
 	    Json.writeObject(writer, "separator", separator);
 	    Json.writeObject(writer, "tokenSeparators", tokenSeparators);
