@@ -26,6 +26,7 @@ import org.apache.wicket.request.IRequestParameters;
 import org.apache.wicket.request.Request;
 import org.apache.wicket.request.http.WebRequest;
 import org.apache.wicket.request.http.WebResponse;
+import org.apache.wicket.util.string.Strings;
 import org.json.JSONException;
 import org.json.JSONWriter;
 
@@ -134,6 +135,19 @@ abstract class AbstractSelect2Choice<T, M> extends HiddenField<M> implements IRe
 	return getMarkupId().replace(".", "\\\\.");
     }
 
+    /**
+     * Escapes single quotes in localized strings to be used as JavaScript strings enclosed in single quotes
+     *
+     * @param key
+     *          resource key for localized message
+     * @return localized string with escaped single quotes
+     */
+    protected String getEscapedJsString(String key) {
+    String value = getString(key);
+
+    return Strings.replaceAll(value, "'", "\\'").toString();
+    }
+
     @Override
     public void renderHead(IHeaderResponse response) {
 	super.renderHead(response);
@@ -172,11 +186,11 @@ abstract class AbstractSelect2Choice<T, M> extends HiddenField<M> implements IRe
 	ajax.setResults("function(data, page) { return data; }");
 
     // configure the localized strings/renderers
-    getSettings().setFormatNoMatches("function() { return '" + getString("noMatches") + "';}");
-    getSettings().setFormatInputTooShort("function(input, min) { return min - input.length == 1 ? '" +getString("inputTooShortSingular") + "' : '" + getString("inputTooShortPlural") + "'.replace('{number}', min - input.length); }");
-    getSettings().setFormatSelectionTooBig("function(limit) { return limit == 1 ? '" + getString("selectionTooBigSingular") + "' : '" + getString("selectionTooBigPlural") + "'.replace('{limit}', limit); }");
-    getSettings().setFormatLoadMore("function() { return '" + getString("loadMore") + "';}");
-    getSettings().setFormatSearching("function() { return '" + getString("searching") + "';}");
+    getSettings().setFormatNoMatches("function() { return '" + getEscapedJsString("noMatches") + "';}");
+    getSettings().setFormatInputTooShort("function(input, min) { return min - input.length == 1 ? '" + getEscapedJsString("inputTooShortSingular") + "' : '" + getEscapedJsString("inputTooShortPlural") + "'.replace('{number}', min - input.length); }");
+    getSettings().setFormatSelectionTooBig("function(limit) { return limit == 1 ? '" + getEscapedJsString("selectionTooBigSingular") + "' : '" + getEscapedJsString("selectionTooBigPlural") + "'.replace('{limit}', limit); }");
+    getSettings().setFormatLoadMore("function() { return '" + getEscapedJsString("loadMore") + "';}");
+    getSettings().setFormatSearching("function() { return '" + getEscapedJsString("searching") + "';}");
     }
 
     @Override
