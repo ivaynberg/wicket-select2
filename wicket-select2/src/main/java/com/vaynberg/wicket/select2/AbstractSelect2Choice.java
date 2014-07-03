@@ -235,9 +235,14 @@ abstract class AbstractSelect2Choice<T, M> extends HiddenField<M> implements IRe
 	// 0-based
 	page -= 1;
 
+	Exception ex = null;
 	Response<T> response = new Response<T>();
+	try{
 	provider.query(term, page, response);
-
+	} catch (Exception e)
+	{
+	    ex = e;
+	}
 	// jsonize and write out the choices to the response
 
 	WebResponse webResponse = (WebResponse) getRequestCycle().getResponse();
@@ -255,7 +260,15 @@ abstract class AbstractSelect2Choice<T, M> extends HiddenField<M> implements IRe
 		json.endObject();
 	    }
 	    json.endArray();
-	    json.key("more").value(response.getHasMore()).endObject();
+	    if (ex==null)
+	    {
+		json.key("more").value(response.getHasMore()).endObject();
+	    }
+	    else
+	    {
+		json.key("error").value(ex.getMessage());
+		json.key("more").value(false).endObject();
+	    }
 	} catch (JSONException e) {
 	    throw new RuntimeException("Could not write Json response", e);
 	}

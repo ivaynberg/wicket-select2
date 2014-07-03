@@ -1450,6 +1450,11 @@ the specific language governing permissions and limitations under the Apache Lic
                     }
                 }
 
+                if (typeof data.error !== "undefined" ) {
+                    render("<li class='select2-no-results'>" + data.error + "</li>");
+                    return;
+                }
+                
                 if (data.results.length === 0 && checkFormatter(opts.formatNoMatches, "formatNoMatches")) {
                     render("<li class='select2-no-results'>" + opts.formatNoMatches(search.val()) + "</li>");
                     return;
