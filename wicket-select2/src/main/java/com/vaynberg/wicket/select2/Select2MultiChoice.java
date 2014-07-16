@@ -62,20 +62,6 @@ public class Select2MultiChoice<T> extends AbstractSelect2Choice<T, Collection<T
     }
 
     @Override
-    public void updateModel() {
-	Collection<T> choices = getModelObject();
-	Collection<T> selection = getConvertedInput();
-
-	if (choices == null) {
-	    getModel().setObject(selection);
-	} else {
-	    choices.clear();
-	    choices.addAll(selection);
-	    getModel().setObject(choices);
-	}
-    }
-
-    @Override
     protected void onInitialize() {
 	super.onInitialize();
 	getSettings().setMultiple(true);
