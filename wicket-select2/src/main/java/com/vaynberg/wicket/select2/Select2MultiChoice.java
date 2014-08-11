@@ -32,88 +32,88 @@ import com.vaynberg.wicket.select2.json.JsonBuilder;
  *            type of choice object
  */
 public class Select2MultiChoice<T> extends AbstractSelect2Choice<T, Collection<T>> {
+	private static final long serialVersionUID = 1L;
 
-    public Select2MultiChoice(String id, IModel<Collection<T>> model, ChoiceProvider<T> provider) {
-	super(id, model, provider);
-    }
-
-    public Select2MultiChoice(String id, IModel<Collection<T>> model) {
-	super(id, model);
-    }
-
-    public Select2MultiChoice(String id) {
-	super(id);
-    }
-
-    @Override
-    protected void convertInput() {
-
-	String input = getWebRequest().getRequestParameters().getParameterValue(getInputName()).toString();
-
-	final Collection<T> choices;
-	if (Strings.isEmpty(input)) {
-        choices = new ArrayList<T>();
-    } else {
-	    choices = getProvider().toChoices(Arrays.asList(input.split(",")));
+	public Select2MultiChoice(String id, IModel<Collection<T>> model, ChoiceProvider<T> provider) {
+		super(id, model, provider);
 	}
 
-	setConvertedInput(choices);
-    }
-
-    @Override
-    public void updateModel() {
-	Collection<T> choices = getModelObject();
-	Collection<T> selection = getConvertedInput();
-
-	if (choices == null) {
-	    setModelObject(selection);
-	} else {
-	    choices.clear();
-	    choices.addAll(selection);
-	    setModelObject(choices);
+	public Select2MultiChoice(String id, IModel<Collection<T>> model) {
+		super(id, model);
 	}
-    }
 
-    @Override
-    protected void onInitialize() {
-	super.onInitialize();
-	getSettings().setMultiple(true);
-    }
-
-    @Override
-    protected String getModelValue() {
-	Collection<T> values = getModelObject();
-	
-	// if values is null or empty set value attribute to an empty string rather then '[]' which does not make sense
-	if (values == null || values.isEmpty()) {
-	    return "";
+	public Select2MultiChoice(String id) {
+		super(id);
 	}
-	
-	return super.getModelValue();
-    }
 
-    @Override
-    protected void renderInitializationScript(IHeaderResponse response) {
-	Collection<? extends T> choices = getModelObject();
-	if (choices != null && !choices.isEmpty()) {
+	@Override
+	protected void convertInput() {
 
-	    JsonBuilder selection = new JsonBuilder();
+		String input = getWebRequest().getParameter(getInputName());
 
-	    try {
-		selection.array();
-		for (T choice : choices) {
-		    selection.object();
-		    getProvider().toJson(choice, selection);
-		    selection.endObject();
+		final Collection<T> choices;
+		if (Strings.isEmpty(input)) {
+			choices = new ArrayList<T>();
+		} else {
+			choices = getProvider().toChoices(Arrays.asList(input.split(",")));
 		}
-		selection.endArray();
-	    } catch (JSONException e) {
-		throw new RuntimeException("Error converting model objec to Json", e);
-	    }
 
-	    response.renderOnDomReadyJavaScript(JQuery.execute("$('#%s').select2('data', %s);", getMarkupId(),
-		    selection.toJson()));
+		setConvertedInput(choices);
 	}
-    }
+
+	@Override
+	public void updateModel() {
+		Collection<T> choices = getModelObject();
+		Collection<T> selection = getConvertedInput();
+
+		if (choices == null) {
+			setModelObject(selection);
+		} else {
+			choices.clear();
+			choices.addAll(selection);
+			setModelObject(choices);
+		}
+	}
+
+	@Override
+	protected void onInitialize() {
+		super.onInitialize();
+		getSettings().setMultiple(true);
+	}
+
+	@Override
+	protected String getModelValue() {
+		Collection<T> values = getModelObject();
+
+		// if values is null or empty set value attribute to an empty string rather then '[]' which does not make sense
+		if (values == null || values.isEmpty()) {
+			return "";
+		}
+
+		return super.getModelValue();
+	}
+
+	@Override
+	protected void renderInitializationScript(IHeaderResponse response) {
+		Collection<? extends T> choices = getModelObject();
+		if (choices != null && !choices.isEmpty()) {
+
+			JsonBuilder selection = new JsonBuilder();
+
+			try {
+				selection.array();
+				for (T choice : choices) {
+					selection.object();
+					getProvider().toJson(choice, selection);
+					selection.endObject();
+				}
+				selection.endArray();
+			} catch (JSONException e) {
+				throw new RuntimeException("Error converting model objec to Json", e);
+			}
+
+			response.renderOnDomReadyJavascript(JQuery.execute("$('#%s').select2('data', %s);", getMarkupId(), selection.toJson()));
+		}
+	}
 
 }
