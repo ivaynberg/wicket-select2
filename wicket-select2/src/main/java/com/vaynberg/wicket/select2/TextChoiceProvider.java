@@ -20,17 +20,19 @@ import org.json.JSONWriter;
  * 
  * @author igor
  * 
- * @param <T> type of choice object
+ * @param <T>
+ *            type of choice object
  */
 public abstract class TextChoiceProvider<T> extends ChoiceProvider<T> {
+	private static final long serialVersionUID = 1L;
 
-    protected abstract String getDisplayText(T choice);
+	protected abstract String getDisplayText(T choice);
 
-    protected abstract Object getId(T choice);
+	protected abstract Object getId(T choice);
 
-    @Override
-    public final void toJson(T choice, JSONWriter writer) throws JSONException {
-	writer.key("id").value(getId(choice)).key("text").value(getDisplayText(choice));
-    };
+	@Override
+	public final void toJson(T choice, JSONWriter writer) throws JSONException {
+		writer.key("id").value(getId(choice)).key("text").value(getDisplayText(choice));
+	};
 
 }

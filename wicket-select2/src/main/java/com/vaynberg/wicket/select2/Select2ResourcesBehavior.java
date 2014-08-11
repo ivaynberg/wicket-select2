@@ -13,48 +13,47 @@
 package com.vaynberg.wicket.select2;
 
 import org.apache.wicket.Application;
-import org.apache.wicket.Component;
-import org.apache.wicket.behavior.Behavior;
+import org.apache.wicket.behavior.AbstractBehavior;
 import org.apache.wicket.markup.html.IHeaderResponse;
 
 /**
- * Adds various resources needed by Select2 such as JavaScript and CSS. Which resources are added is controlled by the
- * {@link ApplicationSettings} object. Minified versions of JavaScript resources will be used when the application is
- * configured in deployment mode.
+ * Adds various resources needed by Select2 such as JavaScript and CSS. Which resources are added is controlled by the {@link ApplicationSettings}
+ * object. Minified versions of JavaScript resources will be used when the application is configured in deployment mode.
  * 
  * @author igor
  * 
  */
-public class Select2ResourcesBehavior extends Behavior {
+public class Select2ResourcesBehavior extends AbstractBehavior {
+	private static final long serialVersionUID = 1L;
 
-    @Override
-    public void renderHead(Component component, IHeaderResponse response) {
+	@Override
+	public void renderHead(IHeaderResponse response) {
 
-	final ApplicationSettings settings = ApplicationSettings.get();
+		final ApplicationSettings settings = ApplicationSettings.get();
 
-	if (settings.isIncludeJquery()) {
-	    if (Application.get().usesDeploymentConfig()) {
-		response.renderJavaScriptReference(settings.getJqueryMinifiedReference());
-	    } else {
-		response.renderJavaScriptReference(settings.getJqueryReference());
-	    }
+		if (settings.isIncludeJquery()) {
+			if (Application.DEPLOYMENT.equalsIgnoreCase(Application.get().getConfigurationType())) {
+				response.renderJavascriptReference(settings.getJqueryMinifiedReference());
+			} else {
+				response.renderJavascriptReference(settings.getJqueryReference());
+			}
+		}
+
+		if (settings.isIncludeMouseWheel()) {
+			response.renderJavascriptReference(settings.getMouseWheelReference());
+		}
+
+		if (settings.isIncludeJavascript()) {
+			if (Application.DEPLOYMENT.equalsIgnoreCase(Application.get().getConfigurationType())) {
+				response.renderJavascriptReference(settings.getJavaScriptMinifiedReference());
+			} else {
+				response.renderJavascriptReference(settings.getJavaScriptReference());
+			}
+		}
+
+		if (settings.isIncludeCss()) {
+			response.renderCSSReference(settings.getCssReference());
+		}
 	}
-
-	if (settings.isIncludeMouseWheel()) {
-	    response.renderJavaScriptReference(settings.getMouseWheelReference());
-	}
-
-	if (settings.isIncludeJavascript()) {
-	    if (Application.get().usesDeploymentConfig()) {
-		response.renderJavaScriptReference(settings.getJavaScriptMinifiedReference());
-	    } else {
-		response.renderJavaScriptReference(settings.getJavaScriptReference());
-	    }
-	}
-
-	if (settings.isIncludeCss()) {
-	    response.renderCSSReference(settings.getCssReference());
-	}
-    }
 
 }

@@ -40,7 +40,9 @@ import org.json.JSONWriter;
  *            type of choice object
  */
 public abstract class ChoiceProvider<T> implements IDetachable {
-    /**
+	private static final long serialVersionUID = 1L;
+
+	/**
      * Queries application for choices that match the search {@code term} and adds them to the {@code response}
      * 
      * @param term
