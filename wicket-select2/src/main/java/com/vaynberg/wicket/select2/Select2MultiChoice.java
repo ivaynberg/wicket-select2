@@ -18,6 +18,7 @@ import java.util.Collection;
 
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.OnDomReadyHeaderItem;
+import org.apache.wicket.markup.html.form.FormComponent;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.util.string.Strings;
 import org.json.JSONException;
@@ -59,6 +60,11 @@ public class Select2MultiChoice<T> extends AbstractSelect2Choice<T, Collection<T
 	}
 
 	setConvertedInput(choices);
+    }
+
+    @Override
+    public void updateModel() {
+	FormComponent.updateCollectionModel(this);
     }
 
     @Override
