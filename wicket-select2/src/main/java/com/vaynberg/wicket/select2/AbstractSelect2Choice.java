@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 
 import org.apache.wicket.IResourceListener;
+import org.apache.wicket.behavior.Behavior;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.request.IRequestParameters;
 import org.apache.wicket.request.Request;
@@ -84,6 +85,7 @@ abstract class AbstractSelect2Choice<T, M> extends Select2ChoiceBaseComponent<M>
     public AbstractSelect2Choice(String id, IModel<M> model, ChoiceProvider<T> provider) {
 	super(id, model);
 	this.provider = provider;
+	
     }
 
    
@@ -172,4 +174,9 @@ abstract class AbstractSelect2Choice<T, M> extends Select2ChoiceBaseComponent<M>
     	super.onDetach();
     }
 
+    @Override
+    protected boolean getStatelessHint() {
+        return false;
+    }
+    
 }
