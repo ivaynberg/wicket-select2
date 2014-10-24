@@ -269,8 +269,10 @@ abstract class AbstractSelect2Choice<T, M> extends HiddenField<M> implements IRe
 
     @Override
     protected void onDetach() {
-	provider.detach();
-	super.onDetach();
+    	if(provider != null) {
+    		provider.detach();
+    	}
+    	super.onDetach();
     }
 
 }
