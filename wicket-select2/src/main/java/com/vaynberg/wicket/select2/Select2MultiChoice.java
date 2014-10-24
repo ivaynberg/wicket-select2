@@ -12,10 +12,7 @@
  */
 package com.vaynberg.wicket.select2;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-
+import com.vaynberg.wicket.select2.json.JsonBuilder;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.OnDomReadyHeaderItem;
 import org.apache.wicket.markup.html.form.FormComponent;
@@ -23,7 +20,10 @@ import org.apache.wicket.model.IModel;
 import org.apache.wicket.util.string.Strings;
 import org.json.JSONException;
 
-import com.vaynberg.wicket.select2.json.JsonBuilder;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * Multi-select Select2 component. Should be attached to a {@code <input type='hidden'/>} element.
@@ -35,7 +35,7 @@ import com.vaynberg.wicket.select2.json.JsonBuilder;
  */
 public class Select2MultiChoice<T> extends AbstractSelect2Choice<T, Collection<T>> {
 
-    public Select2MultiChoice(String id, IModel<Collection<T>> model, ChoiceProvider<T> provider) {
+	public Select2MultiChoice(String id, IModel<Collection<T>> model, ChoiceProvider<T> provider) {
 	super(id, model, provider);
     }
 
@@ -56,13 +56,46 @@ public class Select2MultiChoice<T> extends AbstractSelect2Choice<T, Collection<T
 	if (Strings.isEmpty(input)) {
 	    choices = new ArrayList<T>();
 	} else {
-	    choices = getProvider().toChoices(Arrays.asList(input.split(",")));
+		List<String> ids = splitInput( input );
+		choices = getProvider().toChoices( ids );
 	}
 
 	setConvertedInput(choices);
     }
 
-    @Override
+	static List<String> splitInput( String input ) {
+
+		if( input.startsWith( "{" ) && input.endsWith( "}" )) {
+			// Assume we're using JSON IDs
+			List<String> result = new ArrayList<String>();
+
+			int openBracket = 0;
+			Integer lastStartIdx = null;
+			for( int i = 0; i < input.length(); i++ ) {
+				char c = input.charAt( i );
+				if( c == '{' ) {
+					openBracket++;
+					if( lastStartIdx == null) {
+						lastStartIdx = i;
+					}
+				}
+				if( c == '}' ) {
+					openBracket--;
+					if( openBracket == 0 ) {
+						String substring = input.substring( lastStartIdx, i + 1 );
+						result.add( substring );
+						lastStartIdx = null;
+					}
+				}
+			}
+
+			return result;
+		}
+
+		return Arrays.asList( input.split( "," ) );
+	}
+
+	@Override
     public void updateModel() {
 	FormComponent.updateCollectionModel(this);
     }
