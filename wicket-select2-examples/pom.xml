@@ -11,6 +11,9 @@
 	<artifactId>wicket-select2-examples</artifactId>
 	<packaging>war</packaging>
 	<name>Wicket-Select2 Examples</name>
+    <properties>
+        <maven.deploy.skip>true</maven.deploy.skip> <!-- don't deploy war file -->
+    </properties>
 	<dependencies>
 		<dependency>
 			<groupId>com.vaynberg.wicket.select2</groupId>
