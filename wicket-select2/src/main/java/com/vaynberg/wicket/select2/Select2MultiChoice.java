@@ -34,6 +34,7 @@ import java.util.List;
  *            type of choice object
  */
 public class Select2MultiChoice<T> extends AbstractSelect2Choice<T, Collection<T>> {
+    private static final long serialVersionUID = 1L;
 
 	public Select2MultiChoice(String id, IModel<Collection<T>> model, ChoiceProvider<T> provider) {
 	super(id, model, provider);
@@ -48,7 +49,7 @@ public class Select2MultiChoice<T> extends AbstractSelect2Choice<T, Collection<T
     }
 
     @Override
-    protected void convertInput() {
+    public void convertInput() {
 
 	String input = getWebRequest().getRequestParameters().getParameterValue(getInputName()).toString();
 

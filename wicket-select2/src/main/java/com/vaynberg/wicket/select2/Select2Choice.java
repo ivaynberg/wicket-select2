@@ -31,6 +31,7 @@ import com.vaynberg.wicket.select2.json.JsonBuilder;
  *            type of choice object
  */
 public class Select2Choice<T> extends AbstractSelect2Choice<T, T> {
+    private static final long serialVersionUID = 1L;
 
     public Select2Choice(String id, IModel<T> model, ChoiceProvider<T> provider) {
 	super(id, model, provider);
@@ -45,7 +46,7 @@ public class Select2Choice<T> extends AbstractSelect2Choice<T, T> {
     }
 
     @Override
-    protected void convertInput() {
+    public void convertInput() {
 
 	String input = getWebRequest().getRequestParameters().getParameterValue(getInputName()).toString();
 	if (Strings.isEmpty(input)) {
