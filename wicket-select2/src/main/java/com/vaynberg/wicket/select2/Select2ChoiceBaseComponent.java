@@ -115,4 +115,18 @@ public abstract class Select2ChoiceBaseComponent<M> extends HiddenField<M> {
 	}
     }
     
+    @Override
+    protected void onRemove() {
+	super.onRemove();
+
+	AjaxRequestTarget target = getRequestCycle().find(AjaxRequestTarget.class);
+
+	if (target != null) {
+	    // ensure the select2 is closed so we do not leave an orphaned dropdown component in the dom
+	    target.prependJavaScript(String.format("$('#%s').select2('close');", getJquerySafeMarkupId()));
+	}
+
+    }
+
+    
 }
