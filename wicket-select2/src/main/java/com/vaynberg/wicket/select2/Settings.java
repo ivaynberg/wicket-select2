@@ -14,6 +14,7 @@ package com.vaynberg.wicket.select2;
 
 import java.io.Serializable;
 
+import org.apache.wicket.model.IModel;
 import org.json.JSONException;
 import org.json.JSONStringer;
 
@@ -38,7 +39,7 @@ public final class Settings implements Serializable {
 
     private Integer minimumInputLength, minimumResultsForSearch;
     private Integer maximumSelectionSize;
-    private Object placeholder;
+    private IModel<String> placeholder;
     private Boolean allowClear;
     private Boolean multiple;
     private Boolean closeOnSelect;
@@ -67,7 +68,7 @@ public final class Settings implements Serializable {
 	    Json.writeObject(writer, "minimumInputLength", minimumInputLength);
 	    Json.writeObject(writer, "minimumResultsForSearch", minimumResultsForSearch);
 	    Json.writeObject(writer, "maximumSelectionSize", maximumSelectionSize);
-	    Json.writeObject(writer, "placeholder", placeholder);
+	    Json.writeObject(writer, "placeholder", placeholder.getObject());
 	    Json.writeObject(writer, "allowClear", allowClear);
 	    Json.writeObject(writer, "multiple", multiple);
 	    Json.writeObject(writer, "closeOnSelect", closeOnSelect);
@@ -130,7 +131,7 @@ public final class Settings implements Serializable {
 	return placeholder;
     }
 
-    public void setPlaceholder(Object placeholder) {
+    public void setPlaceholder(IModel<String> placeholder) {
 	this.placeholder = placeholder;
     }
 
