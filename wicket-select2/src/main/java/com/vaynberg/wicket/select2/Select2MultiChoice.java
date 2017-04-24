@@ -12,7 +12,11 @@
  */
 package com.vaynberg.wicket.select2;
 
-import com.vaynberg.wicket.select2.json.JsonBuilder;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.OnDomReadyHeaderItem;
 import org.apache.wicket.markup.html.form.FormComponent;
@@ -20,10 +24,7 @@ import org.apache.wicket.model.IModel;
 import org.apache.wicket.util.string.Strings;
 import org.json.JSONException;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import com.vaynberg.wicket.select2.json.JsonBuilder;
 
 /**
  * Multi-select Select2 component. Should be attached to a {@code <input type='hidden'/>} element.
@@ -48,7 +49,7 @@ public class Select2MultiChoice<T> extends AbstractSelect2Choice<T, Collection<T
     }
 
     @Override
-    protected void convertInput() {
+    public void convertInput() {
 
 	String input = getWebRequest().getRequestParameters().getParameterValue(getInputName()).toString();
 
