@@ -19,15 +19,15 @@ import org.json.JSONString;
  * JavaScript.
  */
 public class JsonFunction implements JSONString {
+
     private final String value;
 
     public JsonFunction(String value) {
-	this.value = value;
+        this.value = value;
     }
 
     @Override
     public String toJSONString() {
-	return value;
+        return value;
     }
-
 }

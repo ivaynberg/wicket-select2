@@ -21,7 +21,7 @@ import com.vaynberg.wicket.select2.json.Json;
 
 /**
  * Select2 settings. Refer to the Select2 documentation for what these options mean.
- * 
+ *
  * @author igor
  */
 public final class Settings implements Serializable {
@@ -30,10 +30,10 @@ public final class Settings implements Serializable {
      * Some predefined width option values
      */
     public static class Widths {
-	public static String OFF = "off";
-	public static String COPY = "copy";
-	public static String RESOLVE = "resolve";
-	public static String ELEMENT = "element";
+        public static String OFF = "off";
+        public static String COPY = "copy";
+        public static String RESOLVE = "resolve";
+        public static String ELEMENT = "element";
     }
 
     private Integer minimumInputLength, minimumResultsForSearch;
@@ -45,7 +45,7 @@ public final class Settings implements Serializable {
     private String id, matcher, tokenizer;
     private String sortResults;
     private String formatSelection, formatSelectionTooBig, formatResult, formatNoMatches, formatInputTooShort,
-	    formatResultCssClass, formatLoadMore, formatSearching, escapeMarkup;
+            formatResultCssClass, formatLoadMore, formatSearching, escapeMarkup;
     private String createSearchChoice;
     private String initSelection;
     private String query;
@@ -61,339 +61,339 @@ public final class Settings implements Serializable {
     private Boolean dropdownAutoWidth;
 
     public CharSequence toJson() {
-	try {
-	    JSONStringer writer = new JSONStringer();
-	    writer.object();
-	    Json.writeObject(writer, "minimumInputLength", minimumInputLength);
-	    Json.writeObject(writer, "minimumResultsForSearch", minimumResultsForSearch);
-	    Json.writeObject(writer, "maximumSelectionSize", maximumSelectionSize);
-	    Json.writeObject(writer, "placeholder", placeholder);
-	    Json.writeObject(writer, "allowClear", allowClear);
-	    Json.writeObject(writer, "multiple", multiple);
-	    Json.writeObject(writer, "closeOnSelect", closeOnSelect);
-	    Json.writeFunction(writer, "id", id);
-	    Json.writeFunction(writer, "matcher", matcher);
-	    Json.writeFunction(writer, "tokenizer", tokenizer);
-	    Json.writeFunction(writer, "sortResults", sortResults);
-	    Json.writeFunction(writer, "formatSelection", formatSelection);
-	    Json.writeFunction(writer, "formatResult", formatResult);
-	    Json.writeFunction(writer, "formatNoMatches", formatNoMatches);
-	    Json.writeFunction(writer, "formatInputTooShort", formatInputTooShort);
-	    Json.writeFunction(writer, "formatResultCssClass", formatResultCssClass);
-	    Json.writeFunction(writer, "formatSelectionTooBig", formatSelectionTooBig);
-	    Json.writeFunction(writer, "formatLoadMore", formatLoadMore);
-	    Json.writeFunction(writer, "formatSearching", formatSearching);
-	    Json.writeFunction(writer, "escapeMarkup", escapeMarkup);
-	    Json.writeFunction(writer, "createSearchChoice", createSearchChoice);
-	    Json.writeFunction(writer, "initSelection", initSelection);
-	    Json.writeFunction(writer, "query", query);
-	    Json.writeObject(writer, "width", width);
-	    Json.writeObject(writer, "openOnEnter", openOnEnter);
-	    Json.writeFunction(writer, "containerCss", containerCss);
-	    Json.writeObject(writer, "containerCssClass", containerCssClass);
-	    Json.writeFunction(writer, "dropdownCss", dropdownCss);
-	    Json.writeObject(writer, "dropdownCssClass", dropdownCssClass);
-	    Json.writeObject(writer, "separator", separator);
-	    Json.writeObject(writer, "tokenSeparators", tokenSeparators);
-	    Json.writeObject(writer, "dropdownAutoWidth", dropdownAutoWidth);
-	    if (ajax != null) {
-		writer.key("ajax");
-		ajax.toJson(writer);
-	    }
-	    Json.writeFunction(writer, "data", data);
-	    Json.writeFunction(writer, "tags", tags);
-	    writer.endObject();
+        try {
+            JSONStringer writer = new JSONStringer();
+            writer.object();
+            Json.writeObject(writer, "minimumInputLength", minimumInputLength);
+            Json.writeObject(writer, "minimumResultsForSearch", minimumResultsForSearch);
+            Json.writeObject(writer, "maximumSelectionSize", maximumSelectionSize);
+            Json.writeObject(writer, "placeholder", placeholder);
+            Json.writeObject(writer, "allowClear", allowClear);
+            Json.writeObject(writer, "multiple", multiple);
+            Json.writeObject(writer, "closeOnSelect", closeOnSelect);
+            Json.writeFunction(writer, "id", id);
+            Json.writeFunction(writer, "matcher", matcher);
+            Json.writeFunction(writer, "tokenizer", tokenizer);
+            Json.writeFunction(writer, "sortResults", sortResults);
+            Json.writeFunction(writer, "formatSelection", formatSelection);
+            Json.writeFunction(writer, "formatResult", formatResult);
+            Json.writeFunction(writer, "formatNoMatches", formatNoMatches);
+            Json.writeFunction(writer, "formatInputTooShort", formatInputTooShort);
+            Json.writeFunction(writer, "formatResultCssClass", formatResultCssClass);
+            Json.writeFunction(writer, "formatSelectionTooBig", formatSelectionTooBig);
+            Json.writeFunction(writer, "formatLoadMore", formatLoadMore);
+            Json.writeFunction(writer, "formatSearching", formatSearching);
+            Json.writeFunction(writer, "escapeMarkup", escapeMarkup);
+            Json.writeFunction(writer, "createSearchChoice", createSearchChoice);
+            Json.writeFunction(writer, "initSelection", initSelection);
+            Json.writeFunction(writer, "query", query);
+            Json.writeObject(writer, "width", width);
+            Json.writeObject(writer, "openOnEnter", openOnEnter);
+            Json.writeFunction(writer, "containerCss", containerCss);
+            Json.writeObject(writer, "containerCssClass", containerCssClass);
+            Json.writeFunction(writer, "dropdownCss", dropdownCss);
+            Json.writeObject(writer, "dropdownCssClass", dropdownCssClass);
+            Json.writeObject(writer, "separator", separator);
+            Json.writeObject(writer, "tokenSeparators", tokenSeparators);
+            Json.writeObject(writer, "dropdownAutoWidth", dropdownAutoWidth);
+            if (ajax != null) {
+                writer.key("ajax");
+                ajax.toJson(writer);
+            }
+            Json.writeFunction(writer, "data", data);
+            Json.writeFunction(writer, "tags", tags);
+            writer.endObject();
 
-	    return writer.toString();
-	} catch (JSONException e) {
-	    throw new RuntimeException("Could not convert Select2 settings object to Json", e);
-	}
+            return writer.toString();
+        } catch (JSONException e) {
+            throw new RuntimeException("Could not convert Select2 settings object to Json", e);
+        }
     }
 
     public Integer getMinimumInputLength() {
-	return minimumInputLength;
+        return minimumInputLength;
     }
 
     public void setMinimumInputLength(Integer minimumInputLength) {
-	this.minimumInputLength = minimumInputLength;
+        this.minimumInputLength = minimumInputLength;
     }
 
     public Integer getMinimumResultsForSearch() {
-	return minimumResultsForSearch;
+        return minimumResultsForSearch;
     }
 
     public void setMinimumResultsForSearch(Integer minimumResultsForSearch) {
-	this.minimumResultsForSearch = minimumResultsForSearch;
+        this.minimumResultsForSearch = minimumResultsForSearch;
     }
 
     public Object getPlaceholder() {
-	return placeholder;
+        return placeholder;
     }
 
     public void setPlaceholder(Object placeholder) {
-	this.placeholder = placeholder;
+        this.placeholder = placeholder;
     }
 
     public Boolean getAllowClear() {
-	return allowClear;
+        return allowClear;
     }
 
     public void setAllowClear(Boolean allowClear) {
-	this.allowClear = allowClear;
+        this.allowClear = allowClear;
     }
 
     public Boolean getMultiple() {
-	return multiple;
+        return multiple;
     }
 
     public void setMultiple(Boolean multiple) {
-	this.multiple = multiple;
+        this.multiple = multiple;
     }
 
     public Boolean getCloseOnSelect() {
-	return closeOnSelect;
+        return closeOnSelect;
     }
 
     public void setCloseOnSelect(Boolean closeOnSelect) {
-	this.closeOnSelect = closeOnSelect;
+        this.closeOnSelect = closeOnSelect;
     }
 
     public String getId() {
-	return id;
+        return id;
     }
 
     public void setId(String id) {
-	this.id = id;
+        this.id = id;
     }
 
     public String getFormatSelection() {
-	return formatSelection;
+        return formatSelection;
     }
 
     public void setFormatSelection(String formatSelection) {
-	this.formatSelection = formatSelection;
+        this.formatSelection = formatSelection;
     }
 
     public String getFormatResult() {
-	return formatResult;
+        return formatResult;
     }
 
     public void setFormatResult(String formatResult) {
-	this.formatResult = formatResult;
+        this.formatResult = formatResult;
     }
 
     public String getFormatNoMatches() {
-	return formatNoMatches;
+        return formatNoMatches;
     }
 
     public void setFormatNoMatches(String formatNoMatches) {
-	this.formatNoMatches = formatNoMatches;
+        this.formatNoMatches = formatNoMatches;
     }
 
     public String getFormatInputTooShort() {
-	return formatInputTooShort;
+        return formatInputTooShort;
     }
 
     public void setFormatInputTooShort(String formatInputTooShort) {
-	this.formatInputTooShort = formatInputTooShort;
+        this.formatInputTooShort = formatInputTooShort;
     }
 
     public String getCreateSearchChoice() {
-	return createSearchChoice;
+        return createSearchChoice;
     }
 
     public void setCreateSearchChoice(String createSearchChoice) {
-	this.createSearchChoice = createSearchChoice;
+        this.createSearchChoice = createSearchChoice;
     }
 
     public String getInitSelection() {
-	return initSelection;
+        return initSelection;
     }
 
     public void setInitSelection(String initSelection) {
-	this.initSelection = initSelection;
+        this.initSelection = initSelection;
     }
 
     public String getQuery() {
-	return query;
+        return query;
     }
 
     public void setQuery(String query) {
-	this.query = query;
+        this.query = query;
     }
 
     public AjaxSettings getAjax() {
-	return getAjax(false);
+        return getAjax(false);
     }
 
     public AjaxSettings getAjax(boolean createIfNotSet) {
-	if (createIfNotSet && ajax == null) {
-	    ajax = new AjaxSettings();
-	}
-	return ajax;
+        if (createIfNotSet && ajax == null) {
+            ajax = new AjaxSettings();
+        }
+        return ajax;
     }
 
     public void setAjax(AjaxSettings ajax) {
-	this.ajax = ajax;
+        this.ajax = ajax;
     }
 
     public String getData() {
-	return data;
+        return data;
     }
 
     public void setData(String data) {
-	this.data = data;
+        this.data = data;
     }
 
     public String getTags() {
-	return tags;
+        return tags;
     }
 
     public void setTags(String tags) {
-	this.tags = tags;
+        this.tags = tags;
     }
 
     public Integer getMaximumSelectionSize() {
-	return maximumSelectionSize;
+        return maximumSelectionSize;
     }
 
     public void setMaximumSelectionSize(Integer maximumSelectionSize) {
-	this.maximumSelectionSize = maximumSelectionSize;
+        this.maximumSelectionSize = maximumSelectionSize;
     }
 
     public String getMatcher() {
-	return matcher;
+        return matcher;
     }
 
     public void setMatcher(String matcher) {
-	this.matcher = matcher;
+        this.matcher = matcher;
     }
 
     public String getTokenizer() {
-	return tokenizer;
+        return tokenizer;
     }
 
     public void setTokenizer(String tokenizer) {
-	this.tokenizer = tokenizer;
+        this.tokenizer = tokenizer;
     }
-    
+
     public String getSortResults() {
-    	return sortResults;
+        return sortResults;
     }
-    
+
     public void setSortResults(String sortResults) {
-    	this.sortResults = sortResults;
+        this.sortResults = sortResults;
     }
 
     public String getFormatSelectionTooBig() {
-	return formatSelectionTooBig;
+        return formatSelectionTooBig;
     }
 
     public void setFormatSelectionTooBig(String formatSelectionTooBig) {
-	this.formatSelectionTooBig = formatSelectionTooBig;
+        this.formatSelectionTooBig = formatSelectionTooBig;
     }
 
     public String getFormatResultCssClass() {
-	return formatResultCssClass;
+        return formatResultCssClass;
     }
 
     public void setFormatResultCssClass(String formatResultCssClass) {
-	this.formatResultCssClass = formatResultCssClass;
+        this.formatResultCssClass = formatResultCssClass;
     }
 
     public String getFormatLoadMore() {
-	return formatLoadMore;
+        return formatLoadMore;
     }
 
     public void setFormatLoadMore(String formatLoadMore) {
-	this.formatLoadMore = formatLoadMore;
+        this.formatLoadMore = formatLoadMore;
     }
 
     public String getFormatSearching() {
-	return formatSearching;
+        return formatSearching;
     }
 
     public void setFormatSearching(String formatSearching) {
-	this.formatSearching = formatSearching;
+        this.formatSearching = formatSearching;
     }
 
     public String getEscapeMarkup() {
-    return escapeMarkup;
+        return escapeMarkup;
     }
 
     public void setEscapeMarkup(String escapeMarkup) {
-    this.escapeMarkup = escapeMarkup;
+        this.escapeMarkup = escapeMarkup;
     }
 
     public String getWidth() {
-	return width;
+        return width;
     }
 
     public void setWidth(String width) {
-	this.width = width;
+        this.width = width;
     }
 
     public Boolean getOpenOnEnter() {
-	return openOnEnter;
+        return openOnEnter;
     }
 
     public void setOpenOnEnter(Boolean openOnEnter) {
-	this.openOnEnter = openOnEnter;
+        this.openOnEnter = openOnEnter;
     }
 
     public String getContainerCss() {
-	return containerCss;
+        return containerCss;
     }
 
     public void setContainerCss(String containerCss) {
-	this.containerCss = containerCss;
+        this.containerCss = containerCss;
     }
 
     public String getDropdownCss() {
-	return dropdownCss;
+        return dropdownCss;
     }
 
     public void setDropdownCss(String dropdownCss) {
-	this.dropdownCss = dropdownCss;
+        this.dropdownCss = dropdownCss;
     }
 
     public String getContainerCssClass() {
-	return containerCssClass;
+        return containerCssClass;
     }
 
     public void setContainerCssClass(String containerCssClass) {
-	this.containerCssClass = containerCssClass;
+        this.containerCssClass = containerCssClass;
     }
 
     public String getDropdownCssClass() {
-	return dropdownCssClass;
+        return dropdownCssClass;
     }
 
     public void setDropdownCssClass(String dropdownCssClass) {
-	this.dropdownCssClass = dropdownCssClass;
+        this.dropdownCssClass = dropdownCssClass;
     }
 
     public String getSeparator() {
-	return separator;
+        return separator;
     }
 
     public void setSeparator(String separator) {
-	this.separator = separator;
+        this.separator = separator;
     }
 
     public String[] getTokenSeparators() {
-	return tokenSeparators;
+        return tokenSeparators;
     }
 
     public void setTokenSeparators(String[] tokenSeparators) {
-	this.tokenSeparators = tokenSeparators;
+        this.tokenSeparators = tokenSeparators;
     }
 
     public Boolean getDropdownAutoWidth() {
-    return dropdownAutoWidth;
+        return dropdownAutoWidth;
     }
 
     public void setDropdownAutoWidth(Boolean dropdownAutoWidth) {
-    this.dropdownAutoWidth = dropdownAutoWidth;
+        this.dropdownAutoWidth = dropdownAutoWidth;
     }
 }
