@@ -70,9 +70,16 @@ form.add(country);
 // configure various Select2 options
 country.getSettings().setMinimumInputLength(1);
 ```
-The two main Select2 components are the `Select2Choice` which provides single-selection and `Select2MultiChoice` which provides multi-selection.
+The three main Select2 components are the `Select2Choice` which provides single-selection, `Select2MultiChoice` which provides multi-selection, and `Select2GroupedMultiChoice' which provides grouped-multi-selection.
 
-See the `wicket-select2-examples` submodule for  code examples.
+See the `wicket-select2-examples` submodule for code examples.
+
+Running Example
+---------------
+
+To view the example code run `StartSelect2Examples#main` inside the `wicket-select2-examples` module. By default this will run
+Wicket on port 8080. Once running navigate to http://localhost:8080/
+
 
 License
 -------
