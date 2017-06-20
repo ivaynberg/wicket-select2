@@ -95,7 +95,7 @@ public class Select2GroupedMultiChoice<T extends GroupedValue> extends Select2Mu
     }
 
     /**
-     * Groups the {@link Iterable<T>} on the {@link GroupedValue#group}. If the value's group is null or
+     * Groups the {@link Iterable} on the {@link GroupedValue#group}. If the value's group is null or
      * empty its added as {@link Select2GroupedMultiChoice#UNGROUPED}
      *
      * @param response Iterable collection of objects extending {@link GroupedValue}

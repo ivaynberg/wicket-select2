@@ -21,18 +21,14 @@ import org.json.JSONWriter;
 /**
  * <p>
  * Acts as a bridge between Select2 components and the application's domain model.
- * </p>
  * <p>
  * The two important services provided by implementations are:
  * <ul>
  * <li>Feeding choices, represented by the application's domain objects, to Select2 components</li>
  * <li>Transcoding said choices to and from Json so they can consumed by Select2</li>
- * </li>
  * </ul>
- * </p>
  * <p>
  * For the most common usecase where each choice is rendered as a text string see {@link TextChoiceProvider}.
- * </p>
  *
  * @param <T> type of choice object
  * @author igor

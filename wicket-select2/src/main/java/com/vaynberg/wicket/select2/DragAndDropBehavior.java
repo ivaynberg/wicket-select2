@@ -19,7 +19,7 @@ import org.apache.wicket.markup.head.JavaScriptHeaderItem;
 import org.apache.wicket.markup.head.OnDomReadyHeaderItem;
 
 /**
- * Adds drag & drop behavior to Select2MultiChoice components, i.e.
+ * Adds drag and drop behavior to Select2MultiChoice components, i.e.
  * the list of selected values can be sorted.
  *
  * @author Tom Götz (tom@decoded.de)
