@@ -12,6 +12,8 @@
  */
 package com.vaynberg.wicket.select2;
 
+import java.util.Optional;
+
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.event.IEvent;
 import org.apache.wicket.markup.head.IHeaderResponse;
@@ -133,12 +135,10 @@ public abstract class Select2ChoiceBaseComponent<M> extends HiddenField<M> {
     protected void onRemove() {
         super.onRemove();
 
-        AjaxRequestTarget target = getRequestCycle().find(AjaxRequestTarget.class);
-
-        if (target != null) {
+       Optional<AjaxRequestTarget> target = getRequestCycle().find(AjaxRequestTarget.class);
+       if(target.isPresent()) {
             // ensure the select2 is closed so we do not leave an orphaned dropdown component in the dom
-            target.prependJavaScript(String.format("$('#%s').select2('close');", getJquerySafeMarkupId()));
+            target.get().prependJavaScript(String.format("$('#%s').select2('close');", getJquerySafeMarkupId()));
         }
-
     }
 }
