@@ -119,7 +119,7 @@ public class Select2MultiChoice<T> extends AbstractSelect2Choice<T, Collection<T
     @Override
     protected void renderInitializationScript(IHeaderResponse response) {
         Collection<? extends T> choices;
-        if (getWebRequest().getRequestParameters().getParameterNames().contains(getInputName())) {
+        if (hasRawInput()) {
             convertInput();
             choices = getConvertedInput();
         } else {
