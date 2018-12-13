@@ -15,7 +15,7 @@ package com.vaynberg.wicket.select2;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
-import org.apache.wicket.IResourceListener;
+import org.apache.wicket.IRequestListener;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.request.IRequestParameters;
 import org.apache.wicket.request.Request;
@@ -30,7 +30,7 @@ import org.json.JSONWriter;
  * @param <M> type of model object
  * @author igor
  */
-abstract class AbstractSelect2Choice<T, M> extends Select2ChoiceBaseComponent<M> implements IResourceListener {
+abstract class AbstractSelect2Choice<T, M> extends Select2ChoiceBaseComponent<M> implements IRequestListener {
 
     private ChoiceProvider<T> provider;
 
@@ -100,12 +100,12 @@ abstract class AbstractSelect2Choice<T, M> extends Select2ChoiceBaseComponent<M>
     protected void onConfigure() {
         super.onConfigure();
 
-        getSettings().getAjax().setUrl(urlFor(IResourceListener.INTERFACE, null));
+        getSettings().getAjax().setUrl(urlForListener(null));
     }
 
 
     @Override
-    public void onResourceRequested() {
+    public void onRequest() {
 
         // this is the callback that retrieves matching choices used to populate the dropdown
 
@@ -145,6 +145,11 @@ abstract class AbstractSelect2Choice<T, M> extends Select2ChoiceBaseComponent<M>
         } catch (IOException e) {
             throw new RuntimeException("Could not write Json to servlet response", e);
         }
+    }
+
+    @Override
+    public boolean rendersPage() {
+        return false;
     }
 
     @Override

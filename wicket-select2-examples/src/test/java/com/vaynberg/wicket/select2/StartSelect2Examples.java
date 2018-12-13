@@ -12,6 +12,7 @@
  */
 package com.vaynberg.wicket.select2;
 
+import java.io.File;
 import java.lang.management.ManagementFactory;
 
 import javax.management.MBeanServer;
@@ -88,7 +89,13 @@ public class StartSelect2Examples
 		WebAppContext bb = new WebAppContext();
 		bb.setServer(server);
 		bb.setContextPath("/");
-		bb.setWar("src/main/webapp");
+
+		File war=new File("src/main/webapp");
+		if (!war.exists()) {
+			war=new File("wicket-select2-examples/src/main/webapp");
+		}
+
+		bb.setWar(war.getAbsolutePath());
 
 		// uncomment the next two lines if you want to start Jetty with WebSocket (JSR-356) support
 		// you need org.apache.wicket:wicket-native-websocket-javax in the classpath!
